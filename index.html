@@ -105,11 +105,166 @@
       </a>
     </section>
 
-    <!-- ===== INTRO / ABOUT (Platzhalter für Schritt 2) ===== -->
-    <section id="about"></section>
+    <!-- ===== ABOUT / INTRO ===== -->
+    <section id="about" class="about-section">
+      <div class="container">
 
-    <!-- ===== SERVICES (Platzhalter für Schritt 2) ===== -->
-    <section id="services"></section>
+        <div class="about-grid">
+
+          <!-- Left: Story -->
+          <div class="about-text reveal">
+            <span class="section-label">Über uns</span>
+            <h2 class="section-title">Griechische Gastfreundschaft<br /><em>mitten in Bayern</em></h2>
+            <div class="gold-rule" aria-hidden="true"></div>
+            <p class="about-lead">
+              Im Restaurant Delphi in Laaber erwartet Sie echte griechische Küche –
+              zubereitet mit Leidenschaft, frischen Zutaten und dem Respekt
+              vor jahrtausendealter kulinarischer Tradition.
+            </p>
+            <p class="about-body">
+              Von handgemachtem Gyros über zarte Fischgerichte bis hin zu
+              klassischen griechischen Spezialitäten: Jedes Gericht trägt die Handschrift
+              unserer Küche. Wir laden Sie ein, bei uns zu verweilen, zu genießen
+              und sich wie Zuhause zu fühlen – ganz im Geiste der griechischen Gastfreundschaft.
+            </p>
+            <div class="about-owner">
+              <div class="owner-line" aria-hidden="true"></div>
+              <p>Georgios Koumpouris &amp; Team</p>
+            </div>
+          </div>
+
+          <!-- Right: Hours + decorative panel -->
+          <div class="about-panel reveal" style="--reveal-delay: 0.15s">
+
+            <div class="hours-card">
+              <div class="hours-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <h3>Öffnungszeiten</h3>
+              </div>
+
+              <ul class="hours-list">
+                <li class="hours-row hours-closed">
+                  <span class="hours-day">Montag</span>
+                  <span class="hours-time">Ruhetag</span>
+                </li>
+                <li class="hours-row">
+                  <span class="hours-day">Di – Do</span>
+                  <span class="hours-time">17:00 – 24:00</span>
+                </li>
+                <li class="hours-row hours-highlight">
+                  <span class="hours-day">Fr – So &amp; Feiertage</span>
+                  <span class="hours-time">
+                    11:00 – 14:00<br />17:00 – 24:00
+                  </span>
+                </li>
+              </ul>
+
+              <a href="#reservation" class="btn btn-primary hours-cta">
+                Tisch reservieren
+              </a>
+            </div>
+
+            <!-- Decorative Greek key border -->
+            <div class="greek-ornament" aria-hidden="true">
+              <svg viewBox="0 0 200 20" preserveAspectRatio="none">
+                <path d="M0,10 L10,10 L10,2 L18,2 L18,18 L6,18 L6,10 L0,10
+                         M20,10 L30,10 L30,2 L38,2 L38,18 L26,18 L26,10 L20,10
+                         M40,10 L50,10 L50,2 L58,2 L58,18 L46,18 L46,10 L40,10
+                         M60,10 L70,10 L70,2 L78,2 L78,18 L66,18 L66,10 L60,10
+                         M80,10 L90,10 L90,2 L98,2 L98,18 L86,18 L86,10 L80,10
+                         M100,10 L110,10 L110,2 L118,2 L118,18 L106,18 L106,10 L100,10
+                         M120,10 L130,10 L130,2 L138,2 L138,18 L126,18 L126,10 L120,10
+                         M140,10 L150,10 L150,2 L158,2 L158,18 L146,18 L146,10 L140,10
+                         M160,10 L170,10 L170,2 L178,2 L178,18 L166,18 L166,10 L160,10
+                         M180,10 L190,10 L190,2 L198,2 L198,18 L186,18 L186,10 L180,10"
+                      fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.35"/>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===== SERVICES / VORTEILE ===== -->
+    <section id="services" class="services-section" aria-label="Unsere Angebote">
+      <div class="services-bg-text" aria-hidden="true">Delphi</div>
+      <div class="container">
+
+        <div class="services-header reveal">
+          <span class="section-label">Was wir bieten</span>
+          <h2 class="section-title">Genuss in jeder Form</h2>
+        </div>
+
+        <div class="services-grid">
+
+          <article class="service-card reveal" style="--reveal-delay: 0.05s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 12h18M3 6h18M3 18h18"/><circle cx="12" cy="12" r="10"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Im Restaurant</h3>
+            <p class="service-text">Erleben Sie griechische Küche in entspannter, mediterraner Atmosphäre. Mit Freunden, Familie oder als Pärchen – bei uns sind Sie willkommen.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.12s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Lieferservice</h3>
+            <p class="service-text">Griechischer Genuss direkt zu Ihnen nach Hause. Wir liefern frisch zubereitete Speisen in die Region – bequem und schnell.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.19s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Abholung</h3>
+            <p class="service-text">Bestellen Sie Ihre Lieblingsspeisen vor und holen Sie sie frisch und heiß direkt bei uns ab – ganz ohne Wartezeit.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.26s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Außenbereich</h3>
+            <p class="service-text">An warmen Tagen genießen Sie Ihre Mahlzeit im Freien. Unser Außenbereich lädt zum Verweilen unter freiem Himmel ein.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.33s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Online reservieren</h3>
+            <p class="service-text">Sichern Sie sich Ihren Tisch bequem online. Keine Wartezeiten, kein Telefonanruf – einfach Datum wählen und bestätigen.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.40s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Gruppenveranstaltungen</h3>
+            <p class="service-text">Feiern Sie bei uns: Ob Geburtstag, Familienfeier oder Firmenevent – wir gestalten Ihren Abend unvergesslich.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
 
     <!-- ===== MENU (Platzhalter für Schritt 3) ===== -->
     <section id="menu"></section>
