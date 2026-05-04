@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Restaurant Delphi in Laaber – Authentische griechische Küche. Reservierungen, Speisekarte und Kontakt." />
+  <meta name="description" content="Restaurant Delphi in Laaber – Authentische griechische Küche. Tisch reservieren, Speisekarte ansehen. Am Turm 11, 93164 Laaber. Tel: 09498/9071055" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Restaurant Delphi Laaber – Griechische Küche" />
+  <meta property="og:description" content="Authentische griechische Küche in Laaber. Reservierungen, Speisekarte und Öffnungszeiten." />
+  <meta property="og:type"        content="restaurant" />
+  <meta property="og:image"       content="assets/hero-delphi.png" />
+
   <title>Restaurant Delphi Laaber – Griechische Küche</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,8 +19,11 @@
 </head>
 <body>
 
+  <!-- Skip to main content (Accessibility) -->
+  <a href="#about" class="skip-link">Zum Inhalt springen</a>
+
   <!-- ===== HEADER / NAVIGATION ===== -->
-  <header class="site-header" id="site-header">
+  <header class="site-header at-top" id="site-header">
     <div class="header-inner">
 
       <a href="#home" class="logo" aria-label="Restaurant Delphi – Startseite">
@@ -58,6 +68,11 @@
 
   <!-- ===== MOBILE NAV OVERLAY ===== -->
   <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true">
+    <button class="mobile-close" id="mobile-close" aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
     <nav aria-label="Mobile Navigation">
       <ul class="mobile-nav-list">
         <li><a href="#home" class="mobile-nav-link">Start</a></li>
@@ -914,11 +929,18 @@
 
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>&copy; 2025 Restaurant Delphi · Am Turm 11, 93164 Laaber</p>
+        <p>&copy; <span id="footer-year">2026</span> Restaurant Delphi · Am Turm 11, 93164 Laaber</p>
         <p class="footer-credits">Inhaber: Georgios Koumpouris</p>
       </div>
     </div>
   </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Nach oben scrollen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
 
   <script src="script.js"></script>
 </body>
