@@ -86,6 +86,39 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
+/* ---- Menu: Tab switching ---------------------------------- */
+const menuTabs   = document.querySelectorAll('.menu-tab');
+const menuPanels = document.querySelectorAll('.menu-panel');
+
+menuTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const targetId = 'tab-' + tab.dataset.tab;
+
+    // Update tabs
+    menuTabs.forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+
+    // Update panels
+    menuPanels.forEach(panel => {
+      if (panel.id === targetId) {
+        panel.removeAttribute('hidden');
+        panel.classList.add('active');
+      } else {
+        panel.setAttribute('hidden', '');
+        panel.classList.remove('active');
+      }
+    });
+
+    // Scroll active tab into view on mobile
+    tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+});
+
+
 /* ---- Scroll-reveal (will be used in later steps) ---------- */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {

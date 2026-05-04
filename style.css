@@ -734,6 +734,163 @@ ul  { list-style: none; }
 
 
 /* ============================================================
+   MENU SECTION
+   ============================================================ */
+.menu-section {
+  padding: 6rem 0 7rem;
+  background: var(--clr-cream);
+}
+
+.menu-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.menu-header .section-label { text-align: center; }
+
+.menu-intro {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--clr-text-muted);
+  margin-top: .75rem;
+  font-style: italic;
+}
+
+/* ---- Tab bar ---- */
+.menu-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid var(--clr-sand);
+  padding-bottom: 0;
+  position: relative;
+}
+
+.menu-tab {
+  background: none;
+  border: none;
+  padding: .85rem 1.5rem;
+  font-family: var(--font-sans);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition);
+  border-radius: 2px 2px 0 0;
+}
+
+.menu-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--clr-gold);
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+
+.menu-tab:hover { color: var(--clr-dark); }
+
+.menu-tab.active {
+  color: var(--clr-dark);
+}
+.menu-tab.active::after { transform: scaleX(1); }
+
+/* ---- Panels ---- */
+.menu-panel {
+  animation: panelFadeIn .4s ease both;
+}
+.menu-panel[hidden] { display: none; }
+
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Menu grid ---- */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* ---- Single dish card ---- */
+.menu-item {
+  background: var(--clr-white);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--clr-sand);
+  transition: background var(--transition);
+}
+
+.menu-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(201,168,76,.25);
+}
+.menu-item:hover::before { background: var(--clr-gold); }
+
+/* Featured (gold accent) */
+.menu-item--featured::before { background: var(--clr-gold); opacity: .5; }
+.menu-item--featured:hover::before { opacity: 1; }
+
+/* Wide (full-width card) */
+.menu-item--wide {
+  grid-column: 1 / -1;
+}
+
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: .4rem;
+}
+
+.menu-item-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--clr-dark);
+  line-height: 1.3;
+}
+
+.menu-item-price {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--clr-gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.menu-item-desc {
+  font-size: .85rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
@@ -768,7 +925,24 @@ ul  { list-style: none; }
   }
 
   .about-section,
-  .services-section { padding: 4rem 0; }
+  .services-section,
+  .menu-section { padding: 4rem 0 5rem; }
+
+  /* Menu tabs: scroll horizontally on small screens */
+  .menu-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+
+  .menu-tab { flex-shrink: 0; padding: .75rem 1.1rem; }
+
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-item--wide { grid-column: 1; }
 }
 
 @media (max-width: 560px) {
