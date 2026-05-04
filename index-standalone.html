@@ -1,0 +1,2930 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Restaurant Delphi in Laaber – Authentische griechische Küche. Tisch reservieren, Speisekarte ansehen. Am Turm 11, 93164 Laaber. Tel: 09498/9071055" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Restaurant Delphi Laaber – Griechische Küche" />
+  <meta property="og:description" content="Authentische griechische Küche in Laaber. Reservierungen, Speisekarte und Öffnungszeiten." />
+  <meta property="og:type"        content="restaurant" />
+  <meta property="og:image"       content="assets/hero-delphi.png" />
+
+  <title>Restaurant Delphi Laaber – Griechische Küche</title>
+  <style>
+/* ============================================================
+   RESTAURANT DELPHI – STYLE.CSS
+   ============================================================ */
+
+/* ---- CSS-Variablen ---------------------------------------- */
+:root {
+  --clr-green:       #2D6A4F;
+  --clr-green-light: #3D8C6A;
+  --clr-gold:        #C9A84C;
+  --clr-gold-light:  #E2C97E;
+  --clr-cream:       #F7F2E8;
+  --clr-sand:        #EDE5D0;
+  --clr-dark:        #1C1A17;
+  --clr-text:        #3A3530;
+  --clr-text-muted:  #7A7060;
+  --clr-white:       #FFFFFF;
+
+  --font-serif:      'Cormorant Garamond', Georgia, serif;
+  --font-sans:       'Raleway', Arial, sans-serif;
+
+  --header-h:        80px;
+  --transition:      0.35s ease;
+  --radius:          6px;
+  --shadow-sm:       0 2px 12px rgba(0,0,0,.08);
+  --shadow-md:       0 6px 28px rgba(0,0,0,.14);
+}
+
+/* ---- Reset & Base ----------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--clr-text);
+  background: var(--clr-cream);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a   { color: inherit; text-decoration: none; }
+ul  { list-style: none; }
+
+/* Scroll offset so fixed header never hides section headings */
+section[id] { scroll-margin-top: var(--header-h); }
+
+/* ---- Focus styles (keyboard navigation) ------------------- */
+:focus-visible {
+  outline: 2px solid var(--clr-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- Skip to content -------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 9999;
+  background: var(--clr-gold);
+  color: var(--clr-dark);
+  padding: .5rem 1.2rem;
+  border-radius: var(--radius);
+  font-size: .85rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  transition: top .2s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---- Back to Top ------------------------------------------ */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 800;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--clr-dark);
+  color: var(--clr-white);
+  border: 2px solid rgba(255,255,255,.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--transition), transform var(--transition), background var(--transition);
+  pointer-events: none;
+}
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+.back-to-top:hover { background: var(--clr-green); border-color: transparent; }
+.back-to-top svg   { width: 20px; height: 20px; }
+
+/* ---- Reduced motion ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---- Utility ---------------------------------------------- */
+.container {
+  width: min(1200px, 92%);
+  margin-inline: auto;
+}
+
+.section-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin-bottom: .75rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--clr-dark);
+}
+
+/* ---- Buttons ---------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .85rem 2rem;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.btn-primary {
+  background: var(--clr-gold);
+  color: var(--clr-dark);
+  border-color: var(--clr-gold);
+}
+.btn-primary:hover {
+  background: var(--clr-gold-light);
+  border-color: var(--clr-gold-light);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--clr-white);
+  border-color: rgba(255,255,255,.65);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,.12);
+  border-color: var(--clr-white);
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  height: var(--header-h);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+/* transparent when at top of page */
+.site-header.at-top {
+  background: transparent;
+}
+
+/* solid when scrolled */
+.site-header.scrolled {
+  background: rgba(28, 26, 23, 0.96);
+  box-shadow: 0 2px 20px rgba(0,0,0,.3);
+  backdrop-filter: blur(8px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: min(1300px, 94%);
+  margin-inline: auto;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  transition: opacity var(--transition);
+}
+.logo:hover { opacity: .85; }
+
+.logo-icon svg {
+  width: 46px;
+  height: 46px;
+  border-radius: 4px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--clr-white);
+  letter-spacing: .02em;
+}
+
+.logo-sub {
+  font-family: var(--font-sans);
+  font-size: .65rem;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+}
+
+/* Nav links */
+.main-nav { display: flex; align-items: center; }
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.85);
+  transition: color var(--transition);
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--clr-gold);
+  transition: width var(--transition);
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--clr-white);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-cta {
+  padding: .55rem 1.4rem;
+  background: var(--clr-gold);
+  color: var(--clr-dark) !important;
+  border-radius: 2px;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background var(--transition), transform var(--transition);
+}
+.nav-cta:hover {
+  background: var(--clr-gold-light);
+  transform: translateY(-1px);
+}
+
+/* Burger */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.burger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--clr-white);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ============================================================
+   MOBILE OVERLAY NAV
+   ============================================================ */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(20, 18, 15, 0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+.mobile-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  color: var(--clr-white);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.mobile-close:hover { background: rgba(201,168,76,.3); }
+.mobile-close svg   { width: 18px; height: 18px; }
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--clr-white);
+  letter-spacing: .05em;
+  transition: color var(--transition);
+}
+.mobile-nav-link:hover { color: var(--clr-gold); }
+
+.mobile-nav-cta {
+  margin-top: 1rem;
+  padding: .7rem 2.5rem;
+  background: var(--clr-gold);
+  color: var(--clr-dark) !important;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.mobile-nav-cta:hover {
+  background: var(--clr-gold-light);
+  color: var(--clr-dark) !important;
+}
+
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* fallback if image missing */
+  background: linear-gradient(135deg, #1C3A2A 0%, #2D6A4F 50%, #1C1A17 100%);
+}
+
+.hero-image-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform-origin: center center;
+  will-change: transform;
+  animation: heroZoom 14s ease-out forwards;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1.08) translateY(0); }
+  to   { transform: scale(1.0)  translateY(0); }
+}
+
+/* Multi-layer overlay: bottom heavy for text legibility */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(20, 18, 15, 0.25) 0%,
+      rgba(20, 18, 15, 0.10) 30%,
+      rgba(20, 18, 15, 0.45) 65%,
+      rgba(20, 18, 15, 0.72) 100%
+    );
+}
+
+/* Hero content */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: var(--clr-white);
+  padding: 0 1.5rem;
+  animation: heroComeIn .9s ease both;
+  animation-delay: .3s;
+}
+
+@keyframes heroComeIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--clr-gold-light);
+  margin-bottom: .75rem;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: .02em;
+  margin-bottom: 1.2rem;
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--clr-gold-light);
+}
+
+/* Decorative divider */
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  color: var(--clr-gold);
+}
+.hero-divider span {
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: currentColor;
+  opacity: .6;
+}
+.hero-divider svg {
+  width: 16px;
+  height: 16px;
+  opacity: .8;
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(.9rem, 2.2vw, 1.1rem);
+  font-weight: 300;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.82);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  color: rgba(255,255,255,.6);
+  animation: scrollBounce 2s ease-in-out infinite;
+  transition: color var(--transition);
+}
+.hero-scroll:hover { color: var(--clr-gold); }
+.hero-scroll svg {
+  width: 28px;
+  height: 28px;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .7s ease calc(var(--reveal-delay, 0s)),
+              transform .7s ease calc(var(--reveal-delay, 0s));
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+.about-section {
+  padding: 6rem 0;
+  background: var(--clr-cream);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* Text column */
+.about-text .section-title {
+  margin-bottom: 1.5rem;
+}
+.about-text .section-title em {
+  font-style: italic;
+  color: var(--clr-green);
+}
+
+.gold-rule {
+  width: 56px;
+  height: 2px;
+  background: var(--clr-gold);
+  margin-bottom: 1.75rem;
+}
+
+.about-lead {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--clr-dark);
+  margin-bottom: 1.25rem;
+}
+
+.about-body {
+  font-size: .97rem;
+  line-height: 1.85;
+  color: var(--clr-text-muted);
+  margin-bottom: 2rem;
+}
+
+.about-owner {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--clr-text);
+}
+.owner-line {
+  flex-shrink: 0;
+  width: 36px;
+  height: 1px;
+  background: var(--clr-gold);
+}
+
+/* Panel column */
+.about-panel {
+  position: relative;
+}
+
+.hours-card {
+  background: var(--clr-dark);
+  color: var(--clr-white);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.hours-header {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin-bottom: 1.75rem;
+}
+.hours-header svg {
+  width: 22px;
+  height: 22px;
+  color: var(--clr-gold);
+  flex-shrink: 0;
+}
+.hours-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+  margin-bottom: 2rem;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: .7rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  font-size: .9rem;
+}
+
+.hours-day {
+  font-weight: 500;
+  color: rgba(255,255,255,.75);
+  letter-spacing: .04em;
+}
+
+.hours-time {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--clr-white);
+  text-align: right;
+  line-height: 1.5;
+}
+
+.hours-closed .hours-day  { color: rgba(255,255,255,.4); }
+.hours-closed .hours-time {
+  color: rgba(201, 168, 76, .7);
+  font-style: italic;
+  font-family: var(--font-sans);
+  font-size: .85rem;
+}
+
+.hours-highlight .hours-time { color: var(--clr-gold-light); }
+
+.hours-cta {
+  width: 100%;
+  justify-content: center;
+}
+
+.greek-ornament {
+  margin-top: 1.5rem;
+  height: 24px;
+  overflow: hidden;
+  opacity: .6;
+}
+.greek-ornament svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ============================================================
+   SERVICES SECTION
+   ============================================================ */
+.services-section {
+  position: relative;
+  padding: 6rem 0 7rem;
+  background: var(--clr-sand);
+  overflow: hidden;
+}
+
+.services-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif);
+  font-size: clamp(8rem, 20vw, 18rem);
+  font-weight: 700;
+  color: rgba(0,0,0,.03);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: .05em;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.services-header .section-label { text-align: center; }
+.services-header .section-title { text-align: center; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.service-card {
+  background: var(--clr-white);
+  padding: 2.2rem 1.8rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--clr-gold), var(--clr-green));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--clr-sand);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--clr-green);
+  transition: background var(--transition), color var(--transition);
+}
+.service-icon svg { width: 22px; height: 22px; }
+.service-card:hover .service-icon {
+  background: var(--clr-green);
+  color: var(--clr-white);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--clr-dark);
+  margin-bottom: .6rem;
+}
+
+.service-text {
+  font-size: .88rem;
+  line-height: 1.75;
+  color: var(--clr-text-muted);
+}
+
+
+/* ============================================================
+   MENU SECTION
+   ============================================================ */
+.menu-section {
+  padding: 6rem 0 7rem;
+  background: var(--clr-cream);
+}
+
+.menu-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.menu-header .section-label { text-align: center; }
+
+.menu-intro {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--clr-text-muted);
+  margin-top: .75rem;
+  font-style: italic;
+}
+
+/* ---- Tab bar ---- */
+.menu-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid var(--clr-sand);
+  padding-bottom: 0;
+  position: relative;
+}
+
+.menu-tab {
+  background: none;
+  border: none;
+  padding: .85rem 1.5rem;
+  font-family: var(--font-sans);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition);
+  border-radius: 2px 2px 0 0;
+}
+
+.menu-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--clr-gold);
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+
+.menu-tab:hover { color: var(--clr-dark); }
+
+.menu-tab.active {
+  color: var(--clr-dark);
+}
+.menu-tab.active::after { transform: scaleX(1); }
+
+/* ---- Panels ---- */
+.menu-panel {
+  animation: panelFadeIn .4s ease both;
+}
+.menu-panel[hidden] { display: none; }
+
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Menu grid ---- */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* ---- Single dish card ---- */
+.menu-item {
+  background: var(--clr-white);
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--clr-sand);
+  transition: background var(--transition);
+}
+
+.menu-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(201,168,76,.25);
+}
+.menu-item:hover::before { background: var(--clr-gold); }
+
+/* Featured (gold accent) */
+.menu-item--featured::before { background: var(--clr-gold); opacity: .5; }
+.menu-item--featured:hover::before { opacity: 1; }
+
+/* Wide (full-width card) */
+.menu-item--wide {
+  grid-column: 1 / -1;
+}
+
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: .4rem;
+}
+
+.menu-item-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--clr-dark);
+  line-height: 1.3;
+}
+
+.menu-item-price {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--clr-gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.menu-item-desc {
+  font-size: .85rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+
+/* ============================================================
+   GALLERY SECTION
+   ============================================================ */
+.gallery-section {
+  padding: 6rem 0 7rem;
+  background: var(--clr-sand);
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.gallery-header .section-label { text-align: center; }
+
+.gallery-intro {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--clr-text-muted);
+  font-style: italic;
+  margin-top: .6rem;
+}
+
+/* Masonry-style grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 220px;
+  gap: 1rem;
+}
+
+.gallery-item {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-item--tall  { grid-row: span 2; }
+.gallery-item--wide  { grid-column: span 2; }
+
+.gallery-img-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Placeholder artwork (removed when real photos are added) */
+.gallery-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--clr-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .5s ease;
+}
+.gallery-placeholder svg {
+  width: 60%;
+  height: 60%;
+}
+.gallery-item:hover .gallery-placeholder { transform: scale(1.05); }
+
+/* Real image inside gallery-item (for when photos are added) */
+.gallery-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+  display: block;
+}
+.gallery-item:hover .gallery-img-wrap img { transform: scale(1.05); }
+
+/* Overlay with expand icon */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 26, 23, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+.gallery-overlay svg {
+  width: 28px;
+  height: 28px;
+  color: var(--clr-white);
+  opacity: 0;
+  transform: scale(.7);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.gallery-item:hover .gallery-overlay {
+  background: rgba(28, 26, 23, 0.45);
+}
+.gallery-item:hover .gallery-overlay svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .6rem 1rem;
+  background: linear-gradient(transparent, rgba(20,18,15,.65));
+  color: var(--clr-white);
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-note {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: .8rem;
+  color: var(--clr-text-muted);
+}
+.gallery-note code {
+  background: var(--clr-cream);
+  padding: .15rem .4rem;
+  border-radius: 3px;
+  font-size: .78rem;
+}
+
+/* ---- Lightbox ---- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 9, 8, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+.lightbox-content .lb-placeholder {
+  width: min(600px, 80vw);
+  height: min(400px, 55vh);
+  background: var(--clr-dark);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  color: rgba(255,255,255,.4);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: fixed;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  color: var(--clr-white);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover { background: rgba(201,168,76,.35); }
+
+.lightbox-close { top: 1.5rem; right: 1.5rem; }
+.lightbox-prev  { left: 1.5rem; top: 50%; transform: translateY(-50%); }
+.lightbox-next  { right: 1.5rem; top: 50%; transform: translateY(-50%); }
+.lightbox-close svg,
+.lightbox-prev svg,
+.lightbox-next svg { width: 20px; height: 20px; }
+
+.lightbox-counter {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,.5);
+  font-size: .8rem;
+  letter-spacing: .1em;
+  font-family: var(--font-sans);
+}
+
+
+/* ============================================================
+   CONTACT & RESERVATION
+   ============================================================ */
+.contact-section {
+  padding: 6rem 0 7rem;
+  background: var(--clr-cream);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* Contact info column */
+.contact-info .section-title { margin-bottom: 1.5rem; }
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.contact-item {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--clr-sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-green);
+  margin-top: .1rem;
+}
+.contact-icon svg { width: 18px; height: 18px; }
+
+.contact-item strong {
+  display: block;
+  font-size: .72rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin-bottom: .3rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.contact-item address,
+.contact-item a,
+.contact-item p {
+  font-style: normal;
+  color: var(--clr-text);
+  line-height: 1.65;
+  font-size: .95rem;
+}
+.contact-item a:hover { color: var(--clr-green); }
+
+.contact-hours {
+  border-collapse: collapse;
+  font-size: .88rem;
+  line-height: 1.7;
+}
+.contact-hours td { padding-right: 1.5rem; color: var(--clr-text); }
+.contact-hours td:first-child { color: var(--clr-text-muted); font-size: .82rem; }
+
+.map-wrap {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.map-wrap iframe { display: block; }
+
+/* Reservation form column */
+.reservation-card {
+  background: var(--clr-dark);
+  color: var(--clr-white);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.reservation-header {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin-bottom: 2rem;
+}
+.reservation-header svg {
+  width: 22px;
+  height: 22px;
+  color: var(--clr-gold);
+  flex-shrink: 0;
+}
+.reservation-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* Form elements */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius);
+  color: var(--clr-white);
+  font-family: var(--font-sans);
+  font-size: .9rem;
+  padding: .75rem 1rem;
+  outline: none;
+  transition: border-color var(--transition), background var(--transition);
+  width: 100%;
+  -webkit-appearance: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,.3); }
+.form-group select option         { background: var(--clr-dark); color: var(--clr-white); }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--clr-gold);
+  background: rgba(255,255,255,.1);
+}
+.form-group textarea { resize: vertical; min-height: 90px; }
+.field-error { border-color: #e05555 !important; }
+
+/* Custom select arrow */
+.form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+}
+
+/* Date input color fix */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+}
+
+.form-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: .5rem;
+  font-size: .88rem;
+}
+
+.form-note {
+  font-size: .75rem;
+  color: rgba(255,255,255,.35);
+  margin-top: .85rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Success message */
+.form-success {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.form-success svg {
+  width: 48px;
+  height: 48px;
+  color: var(--clr-gold);
+  margin: 0 auto 1rem;
+  display: block;
+}
+.form-success h4 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+.form-success p {
+  color: rgba(255,255,255,.65);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--clr-dark);
+  color: rgba(255,255,255,.7);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 3rem;
+  padding: 4rem 0 3rem;
+  align-items: start;
+}
+
+.footer-brand { }
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .75rem;
+}
+.footer-logo-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--clr-white);
+  font-weight: 600;
+}
+
+.footer-tagline {
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  line-height: 1.7;
+}
+
+.footer-nav-title {
+  font-family: var(--font-sans);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin-bottom: 1.1rem;
+  font-weight: 600;
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+.footer-nav a {
+  font-size: .88rem;
+  color: rgba(255,255,255,.6);
+  transition: color var(--transition);
+}
+.footer-nav a:hover { color: var(--clr-white); }
+
+.footer-contact address { font-style: normal; }
+.footer-contact p {
+  font-size: .88rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.6);
+  margin-bottom: .25rem;
+}
+.footer-contact a {
+  color: rgba(255,255,255,.6);
+  transition: color var(--transition);
+}
+.footer-contact a:hover { color: var(--clr-white); }
+.footer-hours { margin-top: .75rem; }
+.footer-hours p strong { color: rgba(255,255,255,.85); }
+
+.footer-cta > p {
+  font-size: .85rem;
+  color: rgba(255,255,255,.5);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.footer-cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.btn-outline-dark {
+  background: transparent;
+  color: rgba(255,255,255,.8);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 2px;
+  padding: .65rem 1.2rem;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  font-family: var(--font-sans);
+}
+.btn-outline-dark:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.4);
+  color: var(--clr-white);
+}
+
+.btn-gold-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .65rem 1.2rem;
+  background: var(--clr-gold);
+  color: var(--clr-dark);
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background var(--transition);
+}
+.btn-gold-sm:hover { background: var(--clr-gold-light); }
+
+/* Footer bottom bar */
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 1.25rem 0;
+}
+.footer-bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer-bottom p {
+  font-size: .75rem;
+  color: rgba(255,255,255,.35);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  :root { --header-h: 68px; }
+
+  .main-nav  { display: none; }
+  .burger    { display: flex; }
+
+  .logo-sub  { display: none; }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 14vw, 4.5rem);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Hero buttons full-width on mobile */
+  .hero-actions .btn { width: 100%; max-width: 300px; justify-content: center; }
+
+  /* About */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  /* Services */
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .about-section,
+  .services-section,
+  .menu-section,
+  .gallery-section,
+  .contact-section { padding: 4rem 0 5rem; }
+
+  /* Gallery */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+  }
+  .gallery-item--wide  { grid-column: span 2; }
+  .gallery-item--tall  { grid-row: span 1; }
+
+  /* Contact */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    padding: 3rem 0 2rem;
+  }
+
+  /* Menu tabs: scroll horizontally on small screens */
+  .menu-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+
+  .menu-tab { flex-shrink: 0; padding: .75rem 1.1rem; }
+
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-item--wide { grid-column: 1; }
+}
+
+@media (max-width: 560px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .gallery-grid  {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 200px;
+  }
+  .gallery-item--wide { grid-column: 1; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .logo-name { font-size: 1.05rem; }
+  .logo-icon svg { width: 38px; height: 38px; }
+  .hours-card { padding: 1.75rem 1.25rem; }
+  .reservation-card { padding: 1.5rem 1.1rem; }
+  .lightbox-prev { left: .5rem; }
+  .lightbox-next { right: .5rem; }
+  .back-to-top { bottom: 1rem; right: 1rem; width: 42px; height: 42px; }
+  .hero-title { font-size: clamp(2.4rem, 13vw, 4rem); }
+}
+
+/* ---- Section dividers (subtle gold line) ------------------ */
+.about-section,
+.menu-section,
+.contact-section {
+  border-top: 1px solid rgba(201,168,76,.15);
+}
+
+/* ---- Print: show menu cleanly ----------------------------- */
+@media print {
+  .site-header, .hero, .gallery-section,
+  .contact-section, .site-footer,
+  .menu-tabs, .back-to-top { display: none !important; }
+
+  .menu-section { padding: 0; }
+  .menu-panel[hidden] { display: block !important; }
+  .menu-grid { grid-template-columns: 1fr 1fr; }
+
+  body { background: white; color: black; }
+  .menu-item { border: 1px solid #ccc; break-inside: avoid; }
+}
+
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Skip to main content (Accessibility) -->
+  <a href="#about" class="skip-link">Zum Inhalt springen</a>
+
+  <!-- ===== HEADER / NAVIGATION ===== -->
+  <header class="site-header at-top" id="site-header">
+    <div class="header-inner">
+
+      <a href="#home" class="logo" aria-label="Restaurant Delphi – Startseite">
+        <div class="logo-icon">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="8" y="8" width="44" height="44" rx="4" fill="#2D6A4F"/>
+            <rect x="14" y="20" width="4" height="20" fill="white"/>
+            <rect x="22" y="16" width="4" height="24" fill="white"/>
+            <rect x="30" y="20" width="4" height="20" fill="white"/>
+            <rect x="38" y="16" width="4" height="24" fill="white"/>
+            <rect x="12" y="38" width="36" height="3" fill="white"/>
+            <text x="30" y="48" text-anchor="middle" font-family="serif" font-size="7" fill="white" font-style="italic">delphi</text>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Restaurant Delphi</span>
+          <span class="logo-sub">Griechische Küche · Laaber</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" id="main-nav" aria-label="Hauptnavigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link">Start</a></li>
+          <li><a href="#about" class="nav-link">Über uns</a></li>
+          <li><a href="#menu" class="nav-link">Speisekarte</a></li>
+          <li><a href="#gallery" class="nav-link">Galerie</a></li>
+          <li><a href="#contact" class="nav-link">Kontakt</a></li>
+          <li>
+            <a href="#reservation" class="nav-cta">Reservieren</a>
+          </li>
+        </ul>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true">
+    <button class="mobile-close" id="mobile-close" aria-label="Menü schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <nav aria-label="Mobile Navigation">
+      <ul class="mobile-nav-list">
+        <li><a href="#home" class="mobile-nav-link">Start</a></li>
+        <li><a href="#about" class="mobile-nav-link">Über uns</a></li>
+        <li><a href="#menu" class="mobile-nav-link">Speisekarte</a></li>
+        <li><a href="#gallery" class="mobile-nav-link">Galerie</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Kontakt</a></li>
+        <li><a href="#reservation" class="mobile-nav-link mobile-nav-cta">Reservieren</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="home" aria-label="Willkommen im Restaurant Delphi">
+      <div class="hero-image-wrap">
+        <img
+          src="assets/hero-delphi.png"
+          alt="Restaurant Delphi – Authentische griechische Atmosphäre mit historischer Kulisse"
+          class="hero-img"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">Willkommen im</p>
+        <h1 class="hero-title">Restaurant<br /><em>Delphi</em></h1>
+        <div class="hero-divider" aria-hidden="true">
+          <span></span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+          <span></span>
+        </div>
+        <p class="hero-subtitle">Authentische griechische Küche<br />inspiriert von Tradition</p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-primary">Speisekarte ansehen</a>
+          <a href="#reservation" class="btn btn-outline">Tisch reservieren</a>
+        </div>
+      </div>
+
+      <a href="#about" class="hero-scroll" aria-label="Nach unten scrollen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </section>
+
+    <!-- ===== ABOUT / INTRO ===== -->
+    <section id="about" class="about-section">
+      <div class="container">
+
+        <div class="about-grid">
+
+          <!-- Left: Story -->
+          <div class="about-text reveal">
+            <span class="section-label">Über uns</span>
+            <h2 class="section-title">Griechische Gastfreundschaft<br /><em>mitten in Bayern</em></h2>
+            <div class="gold-rule" aria-hidden="true"></div>
+            <p class="about-lead">
+              Im Restaurant Delphi in Laaber erwartet Sie echte griechische Küche –
+              zubereitet mit Leidenschaft, frischen Zutaten und dem Respekt
+              vor jahrtausendealter kulinarischer Tradition.
+            </p>
+            <p class="about-body">
+              Von handgemachtem Gyros über zarte Fischgerichte bis hin zu
+              klassischen griechischen Spezialitäten: Jedes Gericht trägt die Handschrift
+              unserer Küche. Wir laden Sie ein, bei uns zu verweilen, zu genießen
+              und sich wie Zuhause zu fühlen – ganz im Geiste der griechischen Gastfreundschaft.
+            </p>
+            <div class="about-owner">
+              <div class="owner-line" aria-hidden="true"></div>
+              <p>Georgios Koumpouris &amp; Team</p>
+            </div>
+          </div>
+
+          <!-- Right: Hours + decorative panel -->
+          <div class="about-panel reveal" style="--reveal-delay: 0.15s">
+
+            <div class="hours-card">
+              <div class="hours-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <h3>Öffnungszeiten</h3>
+              </div>
+
+              <ul class="hours-list">
+                <li class="hours-row hours-closed">
+                  <span class="hours-day">Montag</span>
+                  <span class="hours-time">Ruhetag</span>
+                </li>
+                <li class="hours-row">
+                  <span class="hours-day">Di – Do</span>
+                  <span class="hours-time">17:00 – 24:00</span>
+                </li>
+                <li class="hours-row hours-highlight">
+                  <span class="hours-day">Fr – So &amp; Feiertage</span>
+                  <span class="hours-time">
+                    11:00 – 14:00<br />17:00 – 24:00
+                  </span>
+                </li>
+              </ul>
+
+              <a href="#reservation" class="btn btn-primary hours-cta">
+                Tisch reservieren
+              </a>
+            </div>
+
+            <!-- Decorative Greek key border -->
+            <div class="greek-ornament" aria-hidden="true">
+              <svg viewBox="0 0 200 20" preserveAspectRatio="none">
+                <path d="M0,10 L10,10 L10,2 L18,2 L18,18 L6,18 L6,10 L0,10
+                         M20,10 L30,10 L30,2 L38,2 L38,18 L26,18 L26,10 L20,10
+                         M40,10 L50,10 L50,2 L58,2 L58,18 L46,18 L46,10 L40,10
+                         M60,10 L70,10 L70,2 L78,2 L78,18 L66,18 L66,10 L60,10
+                         M80,10 L90,10 L90,2 L98,2 L98,18 L86,18 L86,10 L80,10
+                         M100,10 L110,10 L110,2 L118,2 L118,18 L106,18 L106,10 L100,10
+                         M120,10 L130,10 L130,2 L138,2 L138,18 L126,18 L126,10 L120,10
+                         M140,10 L150,10 L150,2 L158,2 L158,18 L146,18 L146,10 L140,10
+                         M160,10 L170,10 L170,2 L178,2 L178,18 L166,18 L166,10 L160,10
+                         M180,10 L190,10 L190,2 L198,2 L198,18 L186,18 L186,10 L180,10"
+                      fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.35"/>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===== SERVICES / VORTEILE ===== -->
+    <section id="services" class="services-section" aria-label="Unsere Angebote">
+      <div class="services-bg-text" aria-hidden="true">Delphi</div>
+      <div class="container">
+
+        <div class="services-header reveal">
+          <span class="section-label">Was wir bieten</span>
+          <h2 class="section-title">Genuss in jeder Form</h2>
+        </div>
+
+        <div class="services-grid">
+
+          <article class="service-card reveal" style="--reveal-delay: 0.05s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 12h18M3 6h18M3 18h18"/><circle cx="12" cy="12" r="10"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Im Restaurant</h3>
+            <p class="service-text">Erleben Sie griechische Küche in entspannter, mediterraner Atmosphäre. Mit Freunden, Familie oder als Pärchen – bei uns sind Sie willkommen.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.12s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Lieferservice</h3>
+            <p class="service-text">Griechischer Genuss direkt zu Ihnen nach Hause. Wir liefern frisch zubereitete Speisen in die Region – bequem und schnell.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.19s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Abholung</h3>
+            <p class="service-text">Bestellen Sie Ihre Lieblingsspeisen vor und holen Sie sie frisch und heiß direkt bei uns ab – ganz ohne Wartezeit.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.26s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Außenbereich</h3>
+            <p class="service-text">An warmen Tagen genießen Sie Ihre Mahlzeit im Freien. Unser Außenbereich lädt zum Verweilen unter freiem Himmel ein.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.33s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Online reservieren</h3>
+            <p class="service-text">Sichern Sie sich Ihren Tisch bequem online. Keine Wartezeiten, kein Telefonanruf – einfach Datum wählen und bestätigen.</p>
+          </article>
+
+          <article class="service-card reveal" style="--reveal-delay: 0.40s">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Gruppenveranstaltungen</h3>
+            <p class="service-text">Feiern Sie bei uns: Ob Geburtstag, Familienfeier oder Firmenevent – wir gestalten Ihren Abend unvergesslich.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SPEISEKARTE ===== -->
+    <section id="menu" class="menu-section">
+      <div class="container">
+
+        <div class="menu-header reveal">
+          <span class="section-label">Speisekarte</span>
+          <h2 class="section-title">Unsere Gerichte</h2>
+          <p class="menu-intro">Frisch zubereitet mit ausgewählten Zutaten – klassisch griechisch, jeden Tag.</p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="menu-tabs" role="tablist" aria-label="Speisekarten-Kategorien">
+          <button class="menu-tab active" role="tab" aria-selected="true"  aria-controls="tab-vorspeisen" data-tab="vorspeisen">Vorspeisen</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-salate"     data-tab="salate">Salate</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-fisch"      data-tab="fisch">Fisch &amp; Meer</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-haehnchen"  data-tab="haehnchen">Hähnchen</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-lamm"       data-tab="lamm">Lamm</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-hauptgang"  data-tab="hauptgang">Hauptgerichte</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-weine"      data-tab="weine">Weine</button>
+        </div>
+
+        <!-- ── VORSPEISEN ── -->
+        <div class="menu-panel active" id="tab-vorspeisen" role="tabpanel">
+          <div class="menu-grid">
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Tzatziki</h3>
+                <span class="menu-item-price">7,50 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Joghurt mit Gurke, Knoblauch und Olivenöl</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Taramas</h3>
+                <span class="menu-item-price">7,50 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Fischrogencreme-Dip</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Htipiti</h3>
+                <span class="menu-item-price">7,50 €</span>
+              </div>
+              <p class="menu-item-desc">Würzige Paprika-Feta-Creme</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Saganaki</h3>
+                <span class="menu-item-price">8,00 €</span>
+              </div>
+              <p class="menu-item-desc">Panierter, gebratener Fetakäse</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Oliven und Peperoni</h3>
+                <span class="menu-item-price">6,50 €</span>
+              </div>
+              <p class="menu-item-desc">Auswahl griechischer Oliven mit eingelegten Peperoni</p>
+            </article>
+
+            <article class="menu-item menu-item--wide">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Mezedes-Teller</h3>
+                <span class="menu-item-price">28,00 €</span>
+              </div>
+              <p class="menu-item-desc">Gemischter Vorspeisenteller – ideal zum Teilen</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── SALATE ── -->
+        <div class="menu-panel" id="tab-salate" role="tabpanel" hidden>
+          <div class="menu-grid">
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Oktopus-Salat</h3>
+                <span class="menu-item-price">10,00 €</span>
+              </div>
+              <p class="menu-item-desc">Zarter Tintenfisch auf gemischtem Salat</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Thunfischsalat</h3>
+                <span class="menu-item-price">12,00 €</span>
+              </div>
+              <p class="menu-item-desc">Thunfisch mit Olivenöl und Zwiebeln auf frischem Salat</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Gyros Salat</h3>
+                <span class="menu-item-price">13,50 €</span>
+              </div>
+              <p class="menu-item-desc">Gemischter Salat mit saftigem Gyros</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Hähnchen Salat</h3>
+                <span class="menu-item-price">14,50 €</span>
+              </div>
+              <p class="menu-item-desc">Gemischter Salat mit gebratenen Hähnchenstreifen</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── FISCH & MEER ── -->
+        <div class="menu-panel" id="tab-fisch" role="tabpanel" hidden>
+          <div class="menu-grid">
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Calamari</h3>
+                <span class="menu-item-price">9,00 €</span>
+              </div>
+              <p class="menu-item-desc">Mit Pommes frites und Tzatziki</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Garnelenspaghetti</h3>
+                <span class="menu-item-price">15,90 €</span>
+              </div>
+              <p class="menu-item-desc">Garnelen mit Knoblauch, Ouzo und Tomatensauce</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Fischplatte</h3>
+                <span class="menu-item-price">18,50 €</span>
+              </div>
+              <p class="menu-item-desc">Seehecht, Calamari, Garnelen und Sardellen</p>
+            </article>
+
+            <article class="menu-item menu-item--wide">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Fischplatte für 2 Personen</h3>
+                <span class="menu-item-price">45,00 €</span>
+              </div>
+              <p class="menu-item-desc">Große Auswahl frischer Fisch- und Meeresfrüchte – perfekt zum Teilen</p>
+            </article>
+
+            <article class="menu-item menu-item--wide">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Fischplatte für 4 Personen</h3>
+                <span class="menu-item-price">90,00 €</span>
+              </div>
+              <p class="menu-item-desc">Das große Festessen für die ganze Gruppe</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── HÄHNCHEN ── -->
+        <div class="menu-panel" id="tab-haehnchen" role="tabpanel" hidden>
+          <div class="menu-grid">
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Hähnchenbrust mit Kräuterbutter</h3>
+                <span class="menu-item-price">12,50 €</span>
+              </div>
+              <p class="menu-item-desc">Zarte Hähnchenbrust mit aromatischer Kräuterbutter</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Hähnchenbrust mit Champignon-Curry-Sauce</h3>
+                <span class="menu-item-price">13,50 €</span>
+              </div>
+              <p class="menu-item-desc">Hähnchenbrust in cremiger Champignon-Curry-Sauce</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Hähnchenbrust a la Chef</h3>
+                <span class="menu-item-price">14,50 €</span>
+              </div>
+              <p class="menu-item-desc">Mit Metaxa-Sauce und überbackenem Käse</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Hähnchenschnitzel mit Metaxasoße</h3>
+                <span class="menu-item-price">22,50 €</span>
+              </div>
+              <p class="menu-item-desc">Knuspriges Hähnchenschnitzel mit der feinen Metaxa-Brandy-Sauce</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── LAMM ── -->
+        <div class="menu-panel" id="tab-lamm" role="tabpanel" hidden>
+          <div class="menu-grid">
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Lammfilet mit Tzatziki</h3>
+                <span class="menu-item-price">22,50 €</span>
+              </div>
+              <p class="menu-item-desc">Zartes Lammfilet mit hausgemachtem Tzatziki</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Lammfilet mit Sauce Bernaise</h3>
+                <span class="menu-item-price">36,90 €</span>
+              </div>
+              <p class="menu-item-desc">Edles Lammfilet mit klassischer Sauce Béarnaise</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Lammfilet mit Kräuterbutter</h3>
+                <span class="menu-item-price">36,90 €</span>
+              </div>
+              <p class="menu-item-desc">Feinstes Lammfilet mit Kräuterbutter verfeinert</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── HAUPTGERICHTE ── -->
+        <div class="menu-panel" id="tab-hauptgang" role="tabpanel" hidden>
+          <div class="menu-grid">
+
+            <article class="menu-item menu-item--featured menu-item--wide">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Moussaka</h3>
+                <span class="menu-item-price">17,90 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Klassiker: Kartoffeln, Auberginen, Zucchini, Hackfleisch und Béchamelsauce, überbacken</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── WEINE ── -->
+        <div class="menu-panel" id="tab-weine" role="tabpanel" hidden>
+          <div class="menu-grid">
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Retsina Malamatina</h3>
+                <span class="menu-item-price">10,00 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Weißwein, 0,5 l</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Retsina Malamatina Rosé</h3>
+                <span class="menu-item-price">10,00 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Roséwein, 0,5 l</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Genesis – Rotwein</h3>
+                <span class="menu-item-price">16,00 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Rotwein, 0,5 l</p>
+            </article>
+
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Genesis – Weißwein</h3>
+                <span class="menu-item-price">16,00 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Weißwein, 0,5 l</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Imiglikos – Rotwein</h3>
+                <span class="menu-item-price">22,00 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Rotwein, 0,75 l</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Imiglikos – Weißwein</h3>
+                <span class="menu-item-price">22,00 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Weißwein, 0,75 l</p>
+            </article>
+
+            <article class="menu-item menu-item--featured">
+              <div class="menu-item-header">
+                <h3 class="menu-item-name">Nemea – Rotwein</h3>
+                <span class="menu-item-price">22,00 €</span>
+              </div>
+              <p class="menu-item-desc">Griechischer Rotwein aus der Nemea-Region, 0,75 l</p>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== GALERIE ===== -->
+    <section id="gallery" class="gallery-section">
+      <div class="container">
+        <div class="gallery-header reveal">
+          <span class="section-label">Eindrücke</span>
+          <h2 class="section-title">Atmosphäre &amp; Genuss</h2>
+          <p class="gallery-intro">Lassen Sie sich von unserer mediterranen Welt inspirieren.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Each item: click opens lightbox -->
+          <figure class="gallery-item reveal" style="--reveal-delay:0.05s" data-index="0">
+            <div class="gallery-img-wrap">
+              <div class="gallery-placeholder" aria-label="Außenansicht Restaurant Delphi">
+                <svg viewBox="0 0 80 60" fill="none"><rect width="80" height="60" fill="#2D6A4F" opacity=".15"/><path d="M20 40 L40 20 L60 40" stroke="#2D6A4F" stroke-width="2" fill="none"/><rect x="30" y="28" width="20" height="12" rx="1" stroke="#2D6A4F" stroke-width="1.5" fill="none"/><rect x="8" y="40" width="64" height="2" fill="#C9A84C" opacity=".5"/></svg>
+              </div>
+              <div class="gallery-overlay">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+              </div>
+            </div>
+            <figcaption class="gallery-caption">Außenbereich</figcaption>
+          </figure>
+
+          <figure class="gallery-item reveal gallery-item--tall" style="--reveal-delay:0.10s" data-index="1">
+            <div class="gallery-img-wrap">
+              <div class="gallery-placeholder" aria-label="Innenraum Restaurant Delphi">
+                <svg viewBox="0 0 80 60" fill="none"><rect width="80" height="60" fill="#C9A84C" opacity=".12"/><ellipse cx="40" cy="30" rx="20" ry="15" stroke="#C9A84C" stroke-width="1.5" fill="none"/><path d="M30 30 Q40 20 50 30 Q40 40 30 30" fill="#C9A84C" opacity=".2"/><circle cx="40" cy="30" r="4" fill="#C9A84C" opacity=".4"/></svg>
+              </div>
+              <div class="gallery-overlay">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+              </div>
+            </div>
+            <figcaption class="gallery-caption">Gemütliches Ambiente</figcaption>
+          </figure>
+
+          <figure class="gallery-item reveal" style="--reveal-delay:0.15s" data-index="2">
+            <div class="gallery-img-wrap">
+              <div class="gallery-placeholder" aria-label="Griechische Spezialitäten">
+                <svg viewBox="0 0 80 60" fill="none"><rect width="80" height="60" fill="#EDE5D0"/><circle cx="40" cy="30" r="18" stroke="#2D6A4F" stroke-width="1.5" fill="none"/><path d="M32 30 Q40 22 48 30" stroke="#C9A84C" stroke-width="2" fill="none"/><circle cx="40" cy="34" r="6" fill="#C9A84C" opacity=".3"/></svg>
+              </div>
+              <div class="gallery-overlay">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+              </div>
+            </div>
+            <figcaption class="gallery-caption">Griechische Spezialitäten</figcaption>
+          </figure>
+
+          <figure class="gallery-item reveal" style="--reveal-delay:0.20s" data-index="3">
+            <div class="gallery-img-wrap">
+              <div class="gallery-placeholder" aria-label="Mezedes Vorspeisenteller">
+                <svg viewBox="0 0 80 60" fill="none"><rect width="80" height="60" fill="#2D6A4F" opacity=".1"/><rect x="15" y="15" width="50" height="30" rx="3" stroke="#2D6A4F" stroke-width="1.5" fill="none"/><circle cx="27" cy="28" r="6" stroke="#C9A84C" stroke-width="1.2" fill="none"/><circle cx="40" cy="28" r="6" stroke="#C9A84C" stroke-width="1.2" fill="none"/><circle cx="53" cy="28" r="6" stroke="#C9A84C" stroke-width="1.2" fill="none"/></svg>
+              </div>
+              <div class="gallery-overlay">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+              </div>
+            </div>
+            <figcaption class="gallery-caption">Mezedes-Auswahl</figcaption>
+          </figure>
+
+          <figure class="gallery-item reveal gallery-item--wide" style="--reveal-delay:0.25s" data-index="4">
+            <div class="gallery-img-wrap">
+              <div class="gallery-placeholder" aria-label="Laaber Stadtblick">
+                <svg viewBox="0 0 160 60" fill="none"><rect width="160" height="60" fill="#1C1A17" opacity=".08"/><path d="M0 45 Q40 25 80 35 Q120 20 160 30 L160 60 L0 60Z" fill="#2D6A4F" opacity=".15"/><circle cx="120" cy="20" r="12" fill="#C9A84C" opacity=".2"/><path d="M0 45 Q40 25 80 35 Q120 20 160 30" stroke="#C9A84C" stroke-width="1" fill="none" opacity=".4"/></svg>
+              </div>
+              <div class="gallery-overlay">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+              </div>
+            </div>
+            <figcaption class="gallery-caption">Laaber – unsere Heimat</figcaption>
+          </figure>
+
+          <figure class="gallery-item reveal" style="--reveal-delay:0.30s" data-index="5">
+            <div class="gallery-img-wrap">
+              <div class="gallery-placeholder" aria-label="Griechische Weine">
+                <svg viewBox="0 0 80 60" fill="none"><rect width="80" height="60" fill="#C9A84C" opacity=".08"/><rect x="35" y="10" width="10" height="30" rx="5" stroke="#2D6A4F" stroke-width="1.5" fill="none"/><ellipse cx="40" cy="45" rx="14" ry="5" stroke="#2D6A4F" stroke-width="1.2" fill="none"/><path d="M33 22 Q40 28 47 22" stroke="#C9A84C" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="gallery-overlay">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+              </div>
+            </div>
+            <figcaption class="gallery-caption">Griechische Weine</figcaption>
+          </figure>
+        </div>
+
+        <p class="gallery-note reveal" style="--reveal-delay:0.35s">
+          Eigene Fotos können im Ordner <code>assets/gallery/</code> hinterlegt werden.
+        </p>
+      </div>
+
+      <!-- Lightbox -->
+      <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Bildansicht">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Schließen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <button class="lightbox-prev" id="lightbox-prev" aria-label="Vorheriges Bild">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="lightbox-content" id="lightbox-content"></div>
+        <button class="lightbox-next" id="lightbox-next" aria-label="Nächstes Bild">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+      </div>
+    </section>
+
+
+    <!-- ===== KONTAKT & RESERVIERUNG ===== -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- Left: Info -->
+          <div class="contact-info reveal">
+            <span class="section-label">Besuchen Sie uns</span>
+            <h2 class="section-title">So finden Sie uns</h2>
+            <div class="gold-rule" aria-hidden="true"></div>
+
+            <ul class="contact-list">
+              <li class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Adresse</strong>
+                  <address>Am Turm 11<br />93164 Laaber</address>
+                </div>
+              </li>
+
+              <li class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Telefon</strong>
+                  <a href="tel:+4994989071055">09498 / 9071055</a>
+                </div>
+              </li>
+
+              <li class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Öffnungszeiten</strong>
+                  <table class="contact-hours">
+                    <tr><td>Montag</td><td>Ruhetag</td></tr>
+                    <tr><td>Di – Do</td><td>17:00 – 24:00</td></tr>
+                    <tr><td>Fr – So &amp; Feiertage</td><td>11:00–14:00 &amp; 17:00–24:00</td></tr>
+                  </table>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Map embed placeholder -->
+            <div class="map-wrap">
+              <iframe
+                title="Restaurant Delphi auf der Karte"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2603.3!2d11.8726!3d49.0643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDAzJzUxLjUiTiAxMcKwNTInMjEuNiJF!5e0!3m2!1sde!2sde!4v1"
+                width="100%"
+                height="220"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Right: Reservation form -->
+          <div id="reservation" class="reservation-form-wrap reveal" style="--reveal-delay:0.15s">
+            <div class="reservation-card">
+              <div class="reservation-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <h3>Tisch reservieren</h3>
+              </div>
+
+              <form class="reservation-form" id="reservation-form" novalidate>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="res-name">Name *</label>
+                    <input type="text" id="res-name" name="name" placeholder="Ihr vollständiger Name" required autocomplete="name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="res-phone">Telefon *</label>
+                    <input type="tel" id="res-phone" name="phone" placeholder="Ihre Telefonnummer" required autocomplete="tel" />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="res-date">Datum *</label>
+                    <input type="date" id="res-date" name="date" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="res-time">Uhrzeit *</label>
+                    <select id="res-time" name="time" required>
+                      <option value="">Bitte wählen</option>
+                      <optgroup label="Mittagessen (Fr–So)">
+                        <option>11:00</option>
+                        <option>11:30</option>
+                        <option>12:00</option>
+                        <option>12:30</option>
+                        <option>13:00</option>
+                        <option>13:30</option>
+                      </optgroup>
+                      <optgroup label="Abendessen (Di–So)">
+                        <option>17:00</option>
+                        <option>17:30</option>
+                        <option>18:00</option>
+                        <option>18:30</option>
+                        <option>19:00</option>
+                        <option>19:30</option>
+                        <option>20:00</option>
+                        <option>20:30</option>
+                        <option>21:00</option>
+                        <option>21:30</option>
+                        <option>22:00</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="res-guests">Personen *</label>
+                  <select id="res-guests" name="guests" required>
+                    <option value="">Anzahl wählen</option>
+                    <option>1 Person</option>
+                    <option>2 Personen</option>
+                    <option>3 Personen</option>
+                    <option>4 Personen</option>
+                    <option>5 Personen</option>
+                    <option>6 Personen</option>
+                    <option>7 Personen</option>
+                    <option>8+ Personen</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="res-message">Anmerkungen</label>
+                  <textarea id="res-message" name="message" rows="3" placeholder="Besondere Wünsche, Allergien, Anlass ..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary form-submit">
+                  Reservierung anfragen
+                </button>
+
+                <p class="form-note">
+                  * Pflichtfelder. Wir bestätigen Ihre Reservierung telefonisch.
+                </p>
+              </form>
+
+              <div class="form-success" id="form-success" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+                <h4>Vielen Dank!</h4>
+                <p>Ihre Reservierungsanfrage ist eingegangen. Wir melden uns in Kürze telefonisch bei Ihnen.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer" class="site-footer">
+    <div class="footer-inner container">
+
+      <div class="footer-brand">
+        <a href="#home" class="footer-logo" aria-label="Restaurant Delphi – nach oben">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="44" height="44">
+            <rect x="8" y="8" width="44" height="44" rx="4" fill="#2D6A4F"/>
+            <rect x="14" y="20" width="4" height="20" fill="white"/>
+            <rect x="22" y="16" width="4" height="24" fill="white"/>
+            <rect x="30" y="20" width="4" height="20" fill="white"/>
+            <rect x="38" y="16" width="4" height="24" fill="white"/>
+            <rect x="12" y="38" width="36" height="3" fill="white"/>
+            <text x="30" y="48" text-anchor="middle" font-family="serif" font-size="7" fill="white" font-style="italic">delphi</text>
+          </svg>
+          <span class="footer-logo-name">Restaurant Delphi</span>
+        </a>
+        <p class="footer-tagline">Authentische griechische Küche · Laaber</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer-Navigation">
+        <h4 class="footer-nav-title">Navigation</h4>
+        <ul>
+          <li><a href="#home">Startseite</a></li>
+          <li><a href="#about">Über uns</a></li>
+          <li><a href="#menu">Speisekarte</a></li>
+          <li><a href="#gallery">Galerie</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-contact">
+        <h4 class="footer-nav-title">Kontakt</h4>
+        <address>
+          <p>Am Turm 11<br />93164 Laaber</p>
+          <p><a href="tel:+4994989071055">09498 / 9071055</a></p>
+        </address>
+        <div class="footer-hours">
+          <p><strong>Mo:</strong> Ruhetag</p>
+          <p><strong>Di – Do:</strong> 17:00–24:00</p>
+          <p><strong>Fr – So:</strong> 11:00–14:00 &amp; 17:00–24:00</p>
+        </div>
+      </div>
+
+      <div class="footer-cta">
+        <h4 class="footer-nav-title">Jetzt reservieren</h4>
+        <p>Sichern Sie sich Ihren Tisch – telefonisch oder online.</p>
+        <div class="footer-cta-buttons">
+          <a href="tel:+4994989071055" class="btn btn-outline-dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Anrufen
+          </a>
+          <a href="#reservation" class="btn btn-gold-sm">Online reservieren</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="footer-year">2026</span> Restaurant Delphi · Am Turm 11, 93164 Laaber</p>
+        <p class="footer-credits">Inhaber: Georgios Koumpouris</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Nach oben scrollen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
+  <script>
+/* ============================================================
+   RESTAURANT DELPHI – SCRIPT.JS
+   ============================================================ */
+
+'use strict';
+
+/* ---- Dynamic copyright year ------------------------------- */
+const yearEl = document.getElementById('footer-year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+
+/* ---- Header: transparent → solid on scroll ---------------- */
+const header    = document.getElementById('site-header');
+const atTopCls  = 'at-top';
+const scrollCls = 'scrolled';
+
+function updateHeader() {
+  if (window.scrollY < 40) {
+    header.classList.add(atTopCls);
+    header.classList.remove(scrollCls);
+  } else {
+    header.classList.remove(atTopCls);
+    header.classList.add(scrollCls);
+  }
+}
+updateHeader();
+window.addEventListener('scroll', updateHeader, { passive: true });
+
+
+/* ---- Active nav link on scroll ---------------------------- */
+const sections = document.querySelectorAll('main section[id]');
+
+function updateActiveNav() {
+  const scrollMid = window.scrollY + window.innerHeight / 2;
+  sections.forEach(sec => {
+    if (sec.offsetHeight === 0) return;
+    const top    = sec.offsetTop;
+    const bottom = top + sec.offsetHeight;
+    const link   = document.querySelector(`.nav-link[href="#${sec.id}"]`);
+    if (!link) return;
+    link.classList.toggle('active', scrollMid >= top && scrollMid < bottom);
+  });
+}
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+
+/* ---- Mobile burger menu ----------------------------------- */
+const burger      = document.getElementById('burger');
+const mobileOv    = document.getElementById('mobile-overlay');
+const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+let   menuOpen    = false;
+
+function openMenu() {
+  menuOpen = true;
+  burger.classList.add('open');
+  mobileOv.classList.add('open');
+  mobileOv.setAttribute('aria-hidden', 'false');
+  burger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  menuOpen = false;
+  burger.classList.remove('open');
+  mobileOv.classList.remove('open');
+  mobileOv.setAttribute('aria-hidden', 'true');
+  burger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+const mobileCloseBtn = document.getElementById('mobile-close');
+if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMenu);
+
+
+/* ---- Smooth scroll for anchor links ----------------------- */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const id     = this.getAttribute('href');
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    const headerH = parseInt(getComputedStyle(document.documentElement)
+      .getPropertyValue('--header-h')) || 80;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerH;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+
+/* ---- Menu: Tab switching ---------------------------------- */
+const menuTabs   = document.querySelectorAll('.menu-tab');
+const menuPanels = document.querySelectorAll('.menu-panel');
+
+menuTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const targetId = 'tab-' + tab.dataset.tab;
+
+    menuTabs.forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+
+    menuPanels.forEach(panel => {
+      if (panel.id === targetId) {
+        panel.removeAttribute('hidden');
+        panel.classList.add('active');
+      } else {
+        panel.setAttribute('hidden', '');
+        panel.classList.remove('active');
+      }
+    });
+
+    tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+
+  // Keyboard: left/right arrows move between tabs
+  tab.addEventListener('keydown', e => {
+    const tabs = [...menuTabs];
+    const idx  = tabs.indexOf(tab);
+    if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(idx + 1) % tabs.length].click(); tabs[(idx + 1) % tabs.length].focus(); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); tabs[(idx - 1 + tabs.length) % tabs.length].click(); tabs[(idx - 1 + tabs.length) % tabs.length].focus(); }
+  });
+});
+
+
+/* ---- Gallery Lightbox ------------------------------------- */
+const galleryItems    = document.querySelectorAll('.gallery-item');
+const lightbox        = document.getElementById('lightbox');
+const lightboxContent = document.getElementById('lightbox-content');
+const lightboxCounter = document.getElementById('lightbox-counter');
+const lbClose         = document.getElementById('lightbox-close');
+const lbPrev          = document.getElementById('lightbox-prev');
+const lbNext          = document.getElementById('lightbox-next');
+
+let currentLbIndex = 0;
+let lbOpen         = false;
+
+const galleryData = Array.from(galleryItems).map(item => {
+  const img     = item.querySelector('img');
+  const caption = item.querySelector('.gallery-caption')?.textContent?.trim() || '';
+  return { src: img ? img.src : null, caption };
+});
+
+function openLightbox(index) {
+  currentLbIndex = index;
+  lbOpen = true;
+  renderLightbox();
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  lbClose.focus();
+}
+
+function closeLightbox() {
+  lbOpen = false;
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  galleryItems[currentLbIndex]?.focus();
+}
+
+function renderLightbox() {
+  const { src, caption } = galleryData[currentLbIndex];
+  lightboxCounter.textContent = `${currentLbIndex + 1} / ${galleryData.length}`;
+
+  if (src) {
+    lightboxContent.innerHTML = `<img src="${src}" alt="${caption}" />`;
+  } else {
+    const svg = galleryItems[currentLbIndex].querySelector('.gallery-placeholder')?.innerHTML || '';
+    lightboxContent.innerHTML = `
+      <div class="lb-placeholder">
+        ${svg}
+        <span>${caption}</span>
+      </div>`;
+  }
+}
+
+galleryItems.forEach((item, i) => {
+  item.setAttribute('tabindex', '0');
+  item.setAttribute('role', 'button');
+  item.setAttribute('aria-label', `Bild vergrößern: ${galleryData[i]?.caption || ''}`);
+  item.addEventListener('click',   () => openLightbox(i));
+  item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
+});
+
+if (lbClose) {
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  lbPrev.addEventListener('click', () => { currentLbIndex = (currentLbIndex - 1 + galleryData.length) % galleryData.length; renderLightbox(); });
+  lbNext.addEventListener('click', () => { currentLbIndex = (currentLbIndex + 1) % galleryData.length; renderLightbox(); });
+}
+
+/* Touch swipe for lightbox */
+let touchStartX = 0;
+if (lightbox) {
+  lightbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  lightbox.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(dx) < 40) return;
+    if (dx < 0) { currentLbIndex = (currentLbIndex + 1) % galleryData.length; renderLightbox(); }
+    else         { currentLbIndex = (currentLbIndex - 1 + galleryData.length) % galleryData.length; renderLightbox(); }
+  }, { passive: true });
+}
+
+
+/* ---- Global keyboard handling (priority: lightbox > menu > default) */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (lbOpen)   { closeLightbox(); return; }
+    if (menuOpen) { closeMenu();     return; }
+  }
+  if (lbOpen) {
+    if (e.key === 'ArrowLeft')  { currentLbIndex = (currentLbIndex - 1 + galleryData.length) % galleryData.length; renderLightbox(); }
+    if (e.key === 'ArrowRight') { currentLbIndex = (currentLbIndex + 1) % galleryData.length; renderLightbox(); }
+  }
+});
+
+
+/* ---- Reservation form ------------------------------------- */
+const resForm    = document.getElementById('reservation-form');
+const resSuccess = document.getElementById('form-success');
+const dateInput  = document.getElementById('res-date');
+
+if (dateInput) {
+  dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+}
+
+if (resForm) {
+  resForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const fields = resForm.querySelectorAll('[required]');
+    let valid = true;
+
+    fields.forEach(f => {
+      f.classList.remove('field-error');
+      if (!f.value.trim()) { f.classList.add('field-error'); valid = false; }
+    });
+
+    if (!valid) { resForm.querySelector('.field-error')?.focus(); return; }
+
+    resForm.style.display = 'none';
+    resSuccess.removeAttribute('hidden');
+  });
+
+  resForm.querySelectorAll('[required]').forEach(f => {
+    f.addEventListener('input',  () => f.classList.remove('field-error'));
+    f.addEventListener('change', () => f.classList.remove('field-error'));
+  });
+}
+
+
+/* ---- Back to Top button ----------------------------------- */
+const backToTop = document.getElementById('back-to-top');
+
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+
+/* ---- Subtle hero parallax (only if no reduced-motion pref) */
+const heroImg = document.querySelector('.hero-img');
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (heroImg && !prefersReduced) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      heroImg.style.transform = `scale(1) translateY(${y * 0.25}px)`;
+    }
+  }, { passive: true });
+}
+
+
+/* ---- Scroll-reveal ---------------------------------------- */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  </script>
+</body>
+</html>
