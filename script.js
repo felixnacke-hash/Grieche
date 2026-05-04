@@ -119,6 +119,125 @@ menuTabs.forEach(tab => {
 });
 
 
+/* ---- Gallery Lightbox ------------------------------------- */
+const galleryItems   = document.querySelectorAll('.gallery-item');
+const lightbox       = document.getElementById('lightbox');
+const lightboxContent = document.getElementById('lightbox-content');
+const lightboxCounter = document.getElementById('lightbox-counter');
+const lbClose        = document.getElementById('lightbox-close');
+const lbPrev         = document.getElementById('lightbox-prev');
+const lbNext         = document.getElementById('lightbox-next');
+
+let currentLbIndex = 0;
+
+const galleryData = Array.from(galleryItems).map(item => {
+  const img     = item.querySelector('img');
+  const caption = item.querySelector('.gallery-caption')?.textContent || '';
+  return { src: img ? img.src : null, caption };
+});
+
+function openLightbox(index) {
+  currentLbIndex = index;
+  renderLightbox();
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  lbClose.focus();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function renderLightbox() {
+  const item = galleryData[currentLbIndex];
+  lightboxCounter.textContent = `${currentLbIndex + 1} / ${galleryData.length}`;
+
+  if (item.src) {
+    lightboxContent.innerHTML = `<img src="${item.src}" alt="${item.caption}" />`;
+  } else {
+    // Show placeholder artwork from the gallery card
+    const placeholderSvg = galleryItems[currentLbIndex].querySelector('.gallery-placeholder')?.innerHTML || '';
+    lightboxContent.innerHTML = `
+      <div class="lb-placeholder">
+        ${placeholderSvg}
+        <span>${item.caption}</span>
+      </div>`;
+  }
+}
+
+galleryItems.forEach((item, i) => {
+  item.addEventListener('click', () => openLightbox(i));
+  item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openLightbox(i); });
+  item.setAttribute('tabindex', '0');
+  item.setAttribute('role', 'button');
+});
+
+lbClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+lbPrev.addEventListener('click', () => {
+  currentLbIndex = (currentLbIndex - 1 + galleryData.length) % galleryData.length;
+  renderLightbox();
+});
+lbNext.addEventListener('click', () => {
+  currentLbIndex = (currentLbIndex + 1) % galleryData.length;
+  renderLightbox();
+});
+
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft')   { currentLbIndex = (currentLbIndex - 1 + galleryData.length) % galleryData.length; renderLightbox(); }
+  if (e.key === 'ArrowRight')  { currentLbIndex = (currentLbIndex + 1) % galleryData.length; renderLightbox(); }
+});
+
+
+/* ---- Reservation form ------------------------------------- */
+const resForm    = document.getElementById('reservation-form');
+const resSuccess = document.getElementById('form-success');
+
+// Set min date to today
+const dateInput = document.getElementById('res-date');
+if (dateInput) {
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+}
+
+if (resForm) {
+  resForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Simple validation
+    const required = resForm.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(field => {
+      field.classList.remove('field-error');
+      if (!field.value.trim()) {
+        field.classList.add('field-error');
+        valid = false;
+      }
+    });
+
+    if (!valid) {
+      resForm.querySelector('.field-error')?.focus();
+      return;
+    }
+
+    // Show success (in a real project, POST to backend or email service here)
+    resForm.style.display = 'none';
+    resSuccess.removeAttribute('hidden');
+  });
+
+  // Remove error state on input
+  resForm.querySelectorAll('[required]').forEach(field => {
+    field.addEventListener('input', () => field.classList.remove('field-error'));
+  });
+}
+
+
 /* ---- Scroll-reveal (will be used in later steps) ---------- */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
