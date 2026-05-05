@@ -251,19 +251,21 @@ section[id] { scroll-margin-top: var(--header-h); }
 
 .logo-name {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--clr-white);
-  letter-spacing: .02em;
+  letter-spacing: .03em;
+  text-shadow: 0 1px 8px rgba(0,0,0,.5);
 }
 
 .logo-sub {
   font-family: var(--font-sans);
   font-size: .65rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--clr-gold);
+  text-shadow: 0 1px 6px rgba(0,0,0,.4);
 }
 
 /* Nav links */
@@ -446,28 +448,34 @@ section[id] { scroll-margin-top: var(--header-h); }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: 62% center;
   transform-origin: center center;
   will-change: transform;
-  animation: heroZoom 14s ease-out forwards;
+  animation: heroZoom 16s ease-out forwards;
 }
 
 @keyframes heroZoom {
-  from { transform: scale(1.08) translateY(0); }
-  to   { transform: scale(1.0)  translateY(0); }
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.0); }
 }
 
-/* Multi-layer overlay: bottom heavy for text legibility */
+/* Overlay: left side darker to hide logo box in image, centre/bottom for text */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
+      105deg,
+      rgba(15, 12, 10, 0.72) 0%,
+      rgba(15, 12, 10, 0.35) 38%,
+      rgba(15, 12, 10, 0.15) 60%,
+      rgba(15, 12, 10, 0.50) 100%
+    ),
+    linear-gradient(
       to bottom,
-      rgba(20, 18, 15, 0.25) 0%,
-      rgba(20, 18, 15, 0.10) 30%,
-      rgba(20, 18, 15, 0.45) 65%,
-      rgba(20, 18, 15, 0.72) 100%
+      rgba(15, 12, 10, 0.15) 0%,
+      rgba(15, 12, 10, 0.05) 40%,
+      rgba(15, 12, 10, 0.60) 100%
     );
 }
 
@@ -478,48 +486,44 @@ section[id] { scroll-margin-top: var(--header-h); }
   text-align: center;
   color: var(--clr-white);
   padding: 0 1.5rem;
-  animation: heroComeIn .9s ease both;
-  animation-delay: .3s;
+  animation: heroComeIn 1s ease both;
+  animation-delay: .4s;
 }
 
 @keyframes heroComeIn {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-.hero-eyebrow {
-  font-family: var(--font-sans);
-  font-size: .78rem;
-  font-weight: 500;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--clr-gold-light);
-  margin-bottom: .75rem;
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: clamp(3.2rem, 10vw, 7rem);
+  font-size: clamp(5rem, 16vw, 11rem);
   font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: .02em;
-  margin-bottom: 1.2rem;
+  line-height: 1;
+  letter-spacing: .04em;
+  margin-bottom: 1rem;
 }
 .hero-title em {
   font-style: italic;
-  font-weight: 600;
-  color: var(--clr-gold-light);
+  font-weight: 400;
+  color: var(--clr-white);
+  text-shadow:
+    0 2px 40px rgba(201,168,76,.4),
+    0 0 80px rgba(201,168,76,.15);
 }
 
-/* Decorative divider */
-.hero-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.2rem;
-  color: var(--clr-gold);
+.hero-location {
+  font-family: var(--font-sans);
+  font-size: clamp(.75rem, 1.8vw, .95rem);
+  font-weight: 400;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 2.8rem;
 }
+
+/* old unused – kept for compatibility */
+.hero-eyebrow { display: none; }
 .hero-divider span {
   display: block;
   width: 60px;
@@ -1787,14 +1791,8 @@ section[id] { scroll-margin-top: var(--header-h); }
       </div>
 
       <div class="hero-content">
-        <p class="hero-eyebrow">Willkommen im</p>
-        <h1 class="hero-title">Restaurant<br /><em>Delphi</em></h1>
-        <div class="hero-divider" aria-hidden="true">
-          <span></span>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
-          <span></span>
-        </div>
-        <p class="hero-subtitle">Authentische griechische Küche<br />inspiriert von Tradition</p>
+        <h1 class="hero-title"><em>Delphi</em></h1>
+        <p class="hero-location">Griechisches Restaurant · Laaber</p>
         <div class="hero-actions">
           <a href="#menu" class="btn btn-primary">Speisekarte ansehen</a>
           <a href="#reservation" class="btn btn-outline">Tisch reservieren</a>
@@ -1974,311 +1972,172 @@ section[id] { scroll-margin-top: var(--header-h); }
         <div class="menu-header reveal">
           <span class="section-label">Speisekarte</span>
           <h2 class="section-title">Unsere Gerichte</h2>
-          <p class="menu-intro">Frisch zubereitet mit ausgewählten Zutaten – klassisch griechisch, jeden Tag.</p>
+          <p class="menu-intro">Frisch zubereitet – griechische Tradition auf jedem Teller.</p>
         </div>
 
-        <!-- Tab Navigation -->
         <div class="menu-tabs" role="tablist" aria-label="Speisekarten-Kategorien">
           <button class="menu-tab active" role="tab" aria-selected="true"  aria-controls="tab-vorspeisen" data-tab="vorspeisen">Vorspeisen</button>
           <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-salate"     data-tab="salate">Salate</button>
-          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-fisch"      data-tab="fisch">Fisch &amp; Meer</button>
-          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-haehnchen"  data-tab="haehnchen">Hähnchen</button>
-          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-lamm"       data-tab="lamm">Lamm</button>
-          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-hauptgang"  data-tab="hauptgang">Hauptgerichte</button>
-          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-weine"      data-tab="weine">Weine</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-fisch"      data-tab="fisch">Fisch</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-grill"      data-tab="grill">Vom Grill</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-gyros"      data-tab="gyros">Gyros</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-griechisch" data-tab="griechisch">Griechische Gerichte</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-pizza"      data-tab="pizza">Pizza</button>
+          <button class="menu-tab"        role="tab" aria-selected="false" aria-controls="tab-kinder"     data-tab="kinder">Kindergerichte</button>
         </div>
 
         <!-- ── VORSPEISEN ── -->
         <div class="menu-panel active" id="tab-vorspeisen" role="tabpanel">
           <div class="menu-grid">
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Tzatziki</h3>
-                <span class="menu-item-price">7,50 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Joghurt mit Gurke, Knoblauch und Olivenöl</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Taramas</h3>
-                <span class="menu-item-price">7,50 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Fischrogencreme-Dip</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Htipiti</h3>
-                <span class="menu-item-price">7,50 €</span>
-              </div>
-              <p class="menu-item-desc">Würzige Paprika-Feta-Creme</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Saganaki</h3>
-                <span class="menu-item-price">8,00 €</span>
-              </div>
-              <p class="menu-item-desc">Panierter, gebratener Fetakäse</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Oliven und Peperoni</h3>
-                <span class="menu-item-price">6,50 €</span>
-              </div>
-              <p class="menu-item-desc">Auswahl griechischer Oliven mit eingelegten Peperoni</p>
-            </article>
-
-            <article class="menu-item menu-item--wide">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Mezedes-Teller</h3>
-                <span class="menu-item-price">28,00 €</span>
-              </div>
-              <p class="menu-item-desc">Gemischter Vorspeisenteller – ideal zum Teilen</p>
-            </article>
-
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">8. Gebratene Aubergine</h3><span class="menu-item-price">8,50 €</span></div><p class="menu-item-desc">Mit Knoblauch, Schafkäse und Tomatensoße</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">9. Auberginensalat</h3><span class="menu-item-price">6,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">10. Tzatziki</h3><span class="menu-item-price">6,00 €</span></div><p class="menu-item-desc">Feiner griechischer Joghurt mit Knoblauch und Gurken</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">11. Taramasalat</h3><span class="menu-item-price">6,00 €</span></div><p class="menu-item-desc">Kabeljau-Rogen-Creme</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">12. Oktopus gegrillt</h3><span class="menu-item-price">14,50 €</span></div><p class="menu-item-desc">Krake in Oliven Öl</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">112. Oktopus Salat</h3><span class="menu-item-price">9,00 €</span></div><p class="menu-item-desc">Mit Olivenöl-Dressing, Knoblauch und mediterranen Kräutern</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">40. Scampi Saganaki</h3><span class="menu-item-price">12,50 €</span></div><p class="menu-item-desc">Garnelen in Tomatensoße mit geriebenem Scharfkäse und Knoblauch</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">13. Feta natur</h3><span class="menu-item-price">5,50 €</span></div><p class="menu-item-desc">Serviert mit Oliven und Peperoni aus Kalamata</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">14. Feta Honig</h3><span class="menu-item-price">8,50 €</span></div><p class="menu-item-desc">Schafskäse paniert, mit Honig und Sesam</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">15. Tirokafteri</h3><span class="menu-item-price">6,00 €</span></div><p class="menu-item-desc">Feta Mousse, mit Paprika und Chili</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">16. Gemischte Vorspeisenplatte kalt</h3><span class="menu-item-price">12,00 €</span></div><p class="menu-item-desc">Eine Auswahl unserer Vorspeisen (Brot oder Fladenbrot ist extra)</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">17. Gemischte Vorspeisenplatte warm</h3><span class="menu-item-price">14,90 €</span></div><p class="menu-item-desc">Eine Auswahl unserer Vorspeisen, mit Fladenbrot</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">18. Portion Oliven und Peperoni</h3><span class="menu-item-price">7,50 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">19. Dolmadakia mit Zitrone dazu Tzatziki</h3><span class="menu-item-price">7,50 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">20. Gegrillte Peperoni mit Tzatziki</h3><span class="menu-item-price">7,50 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">21. Dicke Bohnen</h3><span class="menu-item-price">8,50 €</span></div><p class="menu-item-desc">Riesenbohnen aus dem Backofen in feiner Tomatensoße, mit Schafskäse</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">22. Saganaki</h3><span class="menu-item-price">7,50 €</span></div><p class="menu-item-desc">Schafskäse paniert</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">23. Auberginen gebacken mit Tzatziki</h3><span class="menu-item-price">9,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">24. Zucchini gebacken mit Tzatziki</h3><span class="menu-item-price">9,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">124. Gemüse vom Grill</h3><span class="menu-item-price">12,50 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">25. Schafskäse aus dem Backofen</h3><span class="menu-item-price">9,90 €</span></div><p class="menu-item-desc">Serviert mit Zwiebeln, Peperoni und Tomaten, Oliven und Knoblauch</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">26. Knoblauchbrot</h3><span class="menu-item-price">4,50 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">126. Bruschetta auf griechische Art</h3><span class="menu-item-price">8,50 €</span></div><p class="menu-item-desc">Serviert mit Tomaten, Schafskäse und Knoblauch</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">28a. Portion Pommes</h3><span class="menu-item-price">3,70 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">28b. Portion Reis (Tomatenreis)</h3><span class="menu-item-price">3,70 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">29. Pita Fladenbrot</h3><span class="menu-item-price">2,20 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">29a. Pita mit Knoblauch</h3><span class="menu-item-price">2,50 €</span></div></article>
           </div>
         </div>
 
         <!-- ── SALATE ── -->
         <div class="menu-panel" id="tab-salate" role="tabpanel" hidden>
           <div class="menu-grid">
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Oktopus-Salat</h3>
-                <span class="menu-item-price">10,00 €</span>
-              </div>
-              <p class="menu-item-desc">Zarter Tintenfisch auf gemischtem Salat</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Thunfischsalat</h3>
-                <span class="menu-item-price">12,00 €</span>
-              </div>
-              <p class="menu-item-desc">Thunfisch mit Olivenöl und Zwiebeln auf frischem Salat</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Gyros Salat</h3>
-                <span class="menu-item-price">13,50 €</span>
-              </div>
-              <p class="menu-item-desc">Gemischter Salat mit saftigem Gyros</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Hähnchen Salat</h3>
-                <span class="menu-item-price">14,50 €</span>
-              </div>
-              <p class="menu-item-desc">Gemischter Salat mit gebratenen Hähnchenstreifen</p>
-            </article>
-
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">1. Hähnchen Salat</h3><span class="menu-item-price">14,50 €</span></div><p class="menu-item-desc">Gemischter Salat mit gebratenen Hänchenstreifen</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">01. Gyros Salat</h3><span class="menu-item-price">13,50 €</span></div><p class="menu-item-desc">Gemischter Salat mit feinstem Gyros</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">2. Thunfischsalat</h3><span class="menu-item-price">12,00 €</span></div><p class="menu-item-desc">Gemischter Salat mit Thunfisch, Oliven Öl, Zwiebeln</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">3. Griechischer Bauernsalat</h3><span class="menu-item-price">13,00 €</span></div><p class="menu-item-desc">Strauchtomaten, Gurken, Zwiebeln, Schafkäse, Oliven</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">4. Kleiner Griechischer Bauernsalat</h3><span class="menu-item-price">8,00 €</span></div><p class="menu-item-desc">Strauchtomaten, Gurken, Zwiebeln, Schafkäse, Oliven</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">5. Salat Scampi</h3><span class="menu-item-price">15,50 €</span></div><p class="menu-item-desc">Gemischter Salat mit Garnelen und Dressing</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">6. Kleine Gemischte Salat</h3><span class="menu-item-price">4,00 €</span></div></article>
           </div>
         </div>
 
-        <!-- ── FISCH & MEER ── -->
+        <!-- ── FISCH ── -->
         <div class="menu-panel" id="tab-fisch" role="tabpanel" hidden>
           <div class="menu-grid">
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Calamari</h3>
-                <span class="menu-item-price">9,00 €</span>
-              </div>
-              <p class="menu-item-desc">Mit Pommes frites und Tzatziki</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Garnelenspaghetti</h3>
-                <span class="menu-item-price">15,90 €</span>
-              </div>
-              <p class="menu-item-desc">Garnelen mit Knoblauch, Ouzo und Tomatensauce</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Fischplatte</h3>
-                <span class="menu-item-price">18,50 €</span>
-              </div>
-              <p class="menu-item-desc">Seehecht, Calamari, Garnelen und Sardellen</p>
-            </article>
-
-            <article class="menu-item menu-item--wide">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Fischplatte für 2 Personen</h3>
-                <span class="menu-item-price">45,00 €</span>
-              </div>
-              <p class="menu-item-desc">Große Auswahl frischer Fisch- und Meeresfrüchte – perfekt zum Teilen</p>
-            </article>
-
-            <article class="menu-item menu-item--wide">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Fischplatte für 4 Personen</h3>
-                <span class="menu-item-price">90,00 €</span>
-              </div>
-              <p class="menu-item-desc">Das große Festessen für die ganze Gruppe</p>
-            </article>
-
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">130. Dorade Fillet</h3><span class="menu-item-price">19,50 €</span></div><p class="menu-item-desc">Gegrillt mit Gemüse, Reis und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">30. Baby Calamari gegrillt</h3><span class="menu-item-price">18,50 €</span></div><p class="menu-item-desc">Gegrillte Calamari mit Gemüse, Tzatziki, Reis und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">31. Calamari gebacken</h3><span class="menu-item-price">17,50 €</span></div><p class="menu-item-desc">Serviert mit Tzatziki, Pommes und Salat</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">131. Santorini Teller</h3><span class="menu-item-price">27,50 €</span></div><p class="menu-item-desc">Gegrillt Baby Calamari & Oktopus mit Gemüse, Tzatziki, Reis und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">32. Sardellen paniert</h3><span class="menu-item-price">15,50 €</span></div><p class="menu-item-desc">Serviert mit Tzatziki, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">33. Galeos</h3><span class="menu-item-price">16,50 €</span></div><p class="menu-item-desc">Seehecht paniert mit Tzatziki, Reis, Gemüse und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">34. Muscheln</h3><span class="menu-item-price">15,50 €</span></div><p class="menu-item-desc">Muscheln in Tomatensoße mit Knoblauch</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">35. Tropenzungenfilet</h3><span class="menu-item-price">17,00 €</span></div><p class="menu-item-desc">Gebacken mit Tzatziki, Reis, Gemüse und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">37. Garnelen vom Grill (5 Stück)</h3><span class="menu-item-price">19,50 €</span></div><p class="menu-item-desc">Serviert mit Reis, Gemüse und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">38. Veriateller</h3><span class="menu-item-price">17,50 €</span></div><p class="menu-item-desc">Paniertes Tropenzungenfilet und Calamari mit Tzatziki, Reis, Gemüse und Salat</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">39. Mykonosteller</h3><span class="menu-item-price">18,50 €</span></div><p class="menu-item-desc">Seehecht, Calamari, Garnelen, Sardellen mit Tzatziki, Reis, Gemüse und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">41. Fischteller</h3><span class="menu-item-price">19,50 €</span></div><p class="menu-item-desc">Calamari, Garnelen und Sardellen mit Tzatziki, Reis, Gemüse und Salat</p></article>
+            <article class="menu-item menu-item--wide"><div class="menu-item-header"><h3 class="menu-item-name">42. Fischplatte für 2 Personen</h3><span class="menu-item-price">45,00 €</span></div></article>
+            <article class="menu-item menu-item--wide"><div class="menu-item-header"><h3 class="menu-item-name">43. Fischplatte für 4 Personen</h3><span class="menu-item-price">90,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">198. Garnelenspaghetti</h3><span class="menu-item-price">15,90 €</span></div><p class="menu-item-desc">Mit Garnelen, Knoblauch, Ouzo und Tomatensoße</p></article>
           </div>
         </div>
 
-        <!-- ── HÄHNCHEN ── -->
-        <div class="menu-panel" id="tab-haehnchen" role="tabpanel" hidden>
+        <!-- ── VOM GRILL ── -->
+        <div class="menu-panel" id="tab-grill" role="tabpanel" hidden>
           <div class="menu-grid">
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Hähnchenbrust mit Kräuterbutter</h3>
-                <span class="menu-item-price">12,50 €</span>
-              </div>
-              <p class="menu-item-desc">Zarte Hähnchenbrust mit aromatischer Kräuterbutter</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Hähnchenbrust mit Champignon-Curry-Sauce</h3>
-                <span class="menu-item-price">13,50 €</span>
-              </div>
-              <p class="menu-item-desc">Hähnchenbrust in cremiger Champignon-Curry-Sauce</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Hähnchenbrust a la Chef</h3>
-                <span class="menu-item-price">14,50 €</span>
-              </div>
-              <p class="menu-item-desc">Mit Metaxa-Sauce und überbackenem Käse</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Hähnchenschnitzel mit Metaxasoße</h3>
-                <span class="menu-item-price">22,50 €</span>
-              </div>
-              <p class="menu-item-desc">Knuspriges Hähnchenschnitzel mit der feinen Metaxa-Brandy-Sauce</p>
-            </article>
-
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">144. Rindleber vom Grill</h3><span class="menu-item-price">15,50 €</span></div><p class="menu-item-desc">Mit Reis, Zwiebeln, Tzatziki und Salat</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">44. Souvlaki</h3><span class="menu-item-price">15,50 €</span></div><p class="menu-item-desc">2 Fleischspieße (Schwein) mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">45. Hähnchen Souvlaki</h3><span class="menu-item-price">15,50 €</span></div><p class="menu-item-desc">2 Fleischspieße mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">46. Souvlaki – Calamari</h3><span class="menu-item-price">17,50 €</span></div><p class="menu-item-desc">Serviert mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">48. Sutzuki</h3><span class="menu-item-price">15,50 €</span></div><p class="menu-item-desc">Serviert mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">49. Schweinelendchenspieß</h3><span class="menu-item-price">17,50 €</span></div><p class="menu-item-desc">Schweinefilet mit Paprika, Knoblauchbutter, Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">50. Rindsteak mit Sahnesoße</h3><span class="menu-item-price">23,00 €</span></div><p class="menu-item-desc">Serviert mit Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">51. Bifteki</h3><span class="menu-item-price">17,50 €</span></div><p class="menu-item-desc">Hacksteak gefüllt mit Schafskäse, serviert mit Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">52. Lammkotelett</h3><span class="menu-item-price">19,50 €</span></div><p class="menu-item-desc">Serviert mit Tzatziki, Pommes, Gemüse und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">150. Rindsteak vom Grill</h3><span class="menu-item-price">22,90 €</span></div><p class="menu-item-desc">Serviert mit Tzatziki, Pommes, Gemüse und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">151. Hänchenbrustfilet vom Grill</h3><span class="menu-item-price">16,90 €</span></div><p class="menu-item-desc">Serviert mit Tzatziki, Pommes, Gemüse und Salat</p></article>
           </div>
         </div>
 
-        <!-- ── LAMM ── -->
-        <div class="menu-panel" id="tab-lamm" role="tabpanel" hidden>
+        <!-- ── GYROS-SPEZIALITÄTEN ── -->
+        <div class="menu-panel" id="tab-gyros" role="tabpanel" hidden>
           <div class="menu-grid">
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Lammfilet mit Tzatziki</h3>
-                <span class="menu-item-price">22,50 €</span>
-              </div>
-              <p class="menu-item-desc">Zartes Lammfilet mit hausgemachtem Tzatziki</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Lammfilet mit Sauce Bernaise</h3>
-                <span class="menu-item-price">36,90 €</span>
-              </div>
-              <p class="menu-item-desc">Edles Lammfilet mit klassischer Sauce Béarnaise</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Lammfilet mit Kräuterbutter</h3>
-                <span class="menu-item-price">36,90 €</span>
-              </div>
-              <p class="menu-item-desc">Feinstes Lammfilet mit Kräuterbutter verfeinert</p>
-            </article>
-
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">53. Gyros</h3><span class="menu-item-price">14,00 €</span></div><p class="menu-item-desc">Schweinefleisch vom Drehspieß mit Reis, Zwiebeln, Tzatziki und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">54. Gyros Spezial</h3><span class="menu-item-price">16,00 €</span></div><p class="menu-item-desc">Gyros überbacken mit Brot und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">054. Gyros Metaxasoße überbacken</h3><span class="menu-item-price">17,50 €</span></div><p class="menu-item-desc">Gyros überbacken mit Brot und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">47. Gyrosfanne</h3><span class="menu-item-price">16,00 €</span></div><p class="menu-item-desc">Gyros in Sahnesoße, dazu Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">047. Gyrosfanne Metaxasoße</h3><span class="menu-item-price">17,50 €</span></div><p class="menu-item-desc">Gyros in Metaxasoße, dazu Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">55. Gyros Pita</h3><span class="menu-item-price">14,50 €</span></div><p class="menu-item-desc">Schweinefleisch vom Drehspieß mit Pita, Zwiebeln, Tzatziki und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">055. Skepasti</h3><span class="menu-item-price">19,50 €</span></div><p class="menu-item-desc">2 Pitabrote mit Gyros, Tomaten, Zwiebeln, Käse, Tzatziki, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">56. Gyros Calamari</h3><span class="menu-item-price">18,50 €</span></div><p class="menu-item-desc">Serviert mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">58. Grillteller</h3><span class="menu-item-price">20,50 €</span></div><p class="menu-item-desc">Mit Gyros, 1 Souvlaki, 1 Lammkotelett, 1 Sutzuki, Schweinsteak, Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">59. Olympiateller</h3><span class="menu-item-price">15,90 €</span></div><p class="menu-item-desc">Gyros & Souvlaki (1 Stk.) mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">590. Athenteller</h3><span class="menu-item-price">15,90 €</span></div><p class="menu-item-desc">Gyros & Rinderleber (1 Stk.) mit Zwiebeln, Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">60. Finoteller</h3><span class="menu-item-price">16,50 €</span></div><p class="menu-item-desc">Gyros, 1 Souvlaki, 1 Sutzuki mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">62. Akropolisteller</h3><span class="menu-item-price">20,50 €</span></div><p class="menu-item-desc">Gyros, 1 Souvlaki, 2 Lammkoteletts mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">63. Meteorateller</h3><span class="menu-item-price">17,50 €</span></div><p class="menu-item-desc">Gyros, 1 Souvlaki, 2 Sutzuki mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">64. Rhodosteller</h3><span class="menu-item-price">18,50 €</span></div><p class="menu-item-desc">Gyros, 1 Souvlaki, Calamari und Garnelen mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">640. Delphiteller</h3><span class="menu-item-price">18,50 €</span></div><p class="menu-item-desc">Gyros, 1 Souvlaki, 1 Sutzuki, Calamari mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">65. Panoramateller</h3><span class="menu-item-price">19,50 €</span></div><p class="menu-item-desc">Gyros, 2 Souvlaki, Schweinsteak mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item menu-item--wide"><div class="menu-item-header"><h3 class="menu-item-name">70. Kreta-Platte für 2 Personen</h3><span class="menu-item-price">45,00 €</span></div><p class="menu-item-desc">Gyros, 2 Souvlaki, 2 Lammkoteletts, Calamari, 2 Garnelen mit Tzatziki, Reis, Pommes und Salat</p></article>
+            <article class="menu-item menu-item--wide"><div class="menu-item-header"><h3 class="menu-item-name">71. Korfu-Platte für 2 Personen</h3><span class="menu-item-price">45,00 €</span></div><p class="menu-item-desc">Gyros, 2 Souvlaki, 2 Lammkoteletts, 2 Sutzuki, 2 Schweinsteak mit Tzatziki, Reis, Pommes und Salat</p></article>
           </div>
         </div>
 
-        <!-- ── HAUPTGERICHTE ── -->
-        <div class="menu-panel" id="tab-hauptgang" role="tabpanel" hidden>
+        <!-- ── GRIECHISCHE GERICHTE ── -->
+        <div class="menu-panel" id="tab-griechisch" role="tabpanel" hidden>
           <div class="menu-grid">
-
-            <article class="menu-item menu-item--featured menu-item--wide">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Moussaka</h3>
-                <span class="menu-item-price">17,90 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Klassiker: Kartoffeln, Auberginen, Zucchini, Hackfleisch und Béchamelsauce, überbacken</p>
-            </article>
-
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">94. Griechische Moussaka</h3><span class="menu-item-price">15,00 €</span></div><p class="menu-item-desc">Kartoffeln, Hackfleisch, Auberginen und Tomaten unter feiner Käsehaube mit cremiger Béchamelsauce, dazu Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">94a. Vegetarische Moussaka</h3><span class="menu-item-price">15,00 €</span></div><p class="menu-item-desc">Kartoffeln, Auberginen und Tomaten unter feiner Käsehaube mit cremiger Béchamelsauce, dazu Salat</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">95. Stamna</h3><span class="menu-item-price">19,00 €</span></div><p class="menu-item-desc">Gekochtes Rindfleisch mit Gemüse, überbacken mit Pommes, dazu Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">96. Stifado</h3><span class="menu-item-price">19,00 €</span></div><p class="menu-item-desc">Gekochtes Rindfleisch mit Zwiebeln, Tomatensoße, dazu Reis, Pommes und Salat</p></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">98. Kleftiko</h3><span class="menu-item-price">21,00 €</span></div><p class="menu-item-desc">Lammhaxe aus dem Backofen mit Gemüse, dazu Reis, Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">99. Pastitsada</h3><span class="menu-item-price">18,00 €</span></div><p class="menu-item-desc">Gekochtes Rindfleisch mit Zwiebeln, Tomatensoße, dazu Spaghetti</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">192. Flogera</h3><span class="menu-item-price">7,50 €</span></div><p class="menu-item-desc">Blätterteig gefüllt mit Käse und Schinken</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">193. Kässekroketen</h3><span class="menu-item-price">7,50 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">194. Griechische Spinat-Pita</h3><span class="menu-item-price">7,50 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">195. Gemista (Vegetarisch)</h3><span class="menu-item-price">15,50 €</span></div><p class="menu-item-desc">Gefüllte grüne Paprika und Tomate mit Reis, dazu Pommes und Salat</p></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">196. Soutzoukakia</h3><span class="menu-item-price">17,00 €</span></div><p class="menu-item-desc">Frikadellen mit Tomatensoße, dazu Reis und Salat</p></article>
           </div>
         </div>
 
-        <!-- ── WEINE ── -->
-        <div class="menu-panel" id="tab-weine" role="tabpanel" hidden>
+        <!-- ── PIZZA ── -->
+        <div class="menu-panel" id="tab-pizza" role="tabpanel" hidden>
           <div class="menu-grid">
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">82. Margherita</h3><span class="menu-item-price">9,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">83. Salami, Käse</h3><span class="menu-item-price">10,50 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">84. Schinken, Käse, Champignon</h3><span class="menu-item-price">11,50 €</span></div></article>
+            <article class="menu-item menu-item--featured"><div class="menu-item-header"><h3 class="menu-item-name">85. Gyros, frische Tomaten, Käse</h3><span class="menu-item-price">13,00 €</span></div></article>
+            <article class="menu-item menu-item--wide"><div class="menu-item-header"><h3 class="menu-item-name">86. Spezial</h3><span class="menu-item-price">13,50 €</span></div><p class="menu-item-desc">Salami, Schinken, Champignon, Oliven, Paprika, Schafskäse</p></article>
+          </div>
+        </div>
 
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Retsina Malamatina</h3>
-                <span class="menu-item-price">10,00 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Weißwein, 0,5 l</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Retsina Malamatina Rosé</h3>
-                <span class="menu-item-price">10,00 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Roséwein, 0,5 l</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Genesis – Rotwein</h3>
-                <span class="menu-item-price">16,00 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Rotwein, 0,5 l</p>
-            </article>
-
-            <article class="menu-item">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Genesis – Weißwein</h3>
-                <span class="menu-item-price">16,00 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Weißwein, 0,5 l</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Imiglikos – Rotwein</h3>
-                <span class="menu-item-price">22,00 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Rotwein, 0,75 l</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Imiglikos – Weißwein</h3>
-                <span class="menu-item-price">22,00 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Weißwein, 0,75 l</p>
-            </article>
-
-            <article class="menu-item menu-item--featured">
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Nemea – Rotwein</h3>
-                <span class="menu-item-price">22,00 €</span>
-              </div>
-              <p class="menu-item-desc">Griechischer Rotwein aus der Nemea-Region, 0,75 l</p>
-            </article>
-
+        <!-- ── KINDERGERICHTE ── -->
+        <div class="menu-panel" id="tab-kinder" role="tabpanel" hidden>
+          <div class="menu-grid">
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">76. Spaghetti Bolognese</h3><span class="menu-item-price">9,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">77. Gyros mit Pommes und Tzatziki</h3><span class="menu-item-price">9,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">78. Souvlaki mit Pommes und Tzatziki</h3><span class="menu-item-price">9,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">79. Calamari mit Pommes und Tzatziki</h3><span class="menu-item-price">9,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">80. Sutzuki mit Pommes und Tzatziki</h3><span class="menu-item-price">9,00 €</span></div></article>
+            <article class="menu-item"><div class="menu-item-header"><h3 class="menu-item-name">81. Schnitzel mit Pommes</h3><span class="menu-item-price">9,00 €</span></div></article>
           </div>
         </div>
 
       </div>
     </section>
+
 
     <!-- ===== GALERIE ===== -->
     <section id="gallery" class="gallery-section">
